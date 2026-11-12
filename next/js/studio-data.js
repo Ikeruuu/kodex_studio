@@ -3,17 +3,17 @@
 const PLANS=[
  {id:'presencia',name:{en:'Presence',es:'Presencia'},price:490,
   for:{en:'A single page so people can find you and get in touch.',es:'Una página para que te encuentren y te contacten.'},
-  time:{en:'Ready in about 1 week',es:'Lista en torno a 1 semana'},
+  time:{en:'Ready in 1 week',es:'Lista en 1 semana'},
   items:{en:['One-page website, up to 5 sections','Looks right on phones and computers','Contact form or WhatsApp button, map and opening hours','Basic SEO and your Google Business profile','Put online on your own domain'],
          es:['Web de una página, hasta 5 secciones','Se ve bien en móvil y en ordenador','Formulario o botón de WhatsApp, mapa y horarios','SEO básico y tu ficha de Google','Publicada en tu propio dominio']}},
  {id:'negocio',name:{en:'Business',es:'Negocio'},price:990,featured:1,
   for:{en:'A full website that explains what you do and brings in enquiries.',es:'Una web completa que explica lo que haces y te trae consultas.'},
-  time:{en:'Ready in 2 to 3 weeks',es:'Lista en 2 o 3 semanas'},
+  time:{en:'Ready in 2 weeks',es:'Lista en 2 semanas'},
   items:{en:['A full multi-page website','Texts reviewed and organised with you','Gallery or catalogue (without online purchase)','Booking or quote requests by form','Several languages','Visit statistics'],
          es:['Web completa de varias páginas','Textos revisados y ordenados contigo','Galería o catálogo (sin compra online)','Reservas o peticiones de presupuesto por formulario','Varios idiomas','Estadísticas de visitas']}},
  {id:'tienda',name:{en:'Shop',es:'Tienda'},price:1790,
   for:{en:'Your business gone digital: sell or take orders online, with payments and stock under control.',es:'Tu negocio digitalizado: vende o recibe pedidos online, con pagos y stock controlados.'},
-  time:{en:'Ready in 4 to 5 weeks',es:'Lista en 4 o 5 semanas'},
+  time:{en:'Ready in 3 weeks',es:'Lista en 3 semanas'},
   items:{en:['A highly customised website, at the level of this one or beyond','Online shop or catalogue with payment','Stock and orders managed from one panel','Payment gateway set up and tested','Email notices for you and your customers','A session to teach you how to manage it'],
          es:['Web muy personalizada, al nivel de esta o superior','Tienda o catálogo con pago online','Stock y pedidos gestionados desde un solo panel','Pasarela de pago configurada y probada','Avisos por correo para ti y tus clientes','Una sesión para enseñarte a gestionarla']}}
 ];
