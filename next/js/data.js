@@ -1,0 +1,83 @@
+/* Content of the site. This is the file to edit when something changes:
+   PROJECTS  cards in "Things I've built"      FILTERS  the filter buttons above them
+   PHOTOS    frames of the film strip          ROW_A/B  the two moving rows under the hero
+   Every text has an English (en) and a Spanish (es) version. See docs/GUIA.md. */
+const PROJECTS=[
+ {id:'tuturno',cat:['ai','web'],big:1,award:0,title:'TuTurno',
+  ev:{en:'<b>Semifinalist</b>, DATAthon Justicia 2026',es:'<b>Semifinalista</b>, DATAthon Justicia 2026'},
+  d:{en:'An app that explains the justice system to 12–18 year olds through a pixel-art game, short lessons and a voice agent.',es:'Una app que explica la justicia a jóvenes de 12 a 18 años con un juego pixel art, lecciones cortas y un agente de voz.'},
+  more:{en:'I built the FastAPI backend and the AI: a safety filter (fine-tuned Spanish BERT) that routes risky situations to ANAR, and a hybrid RAG over 12 laws that checks every sentence before the agent says it.',es:'Hice el backend en FastAPI y la IA: un filtro de seguridad (BERT en español ajustado) que deriva situaciones de riesgo a ANAR y un RAG híbrido sobre 12 leyes que verifica cada frase antes de que el agente la diga.'},
+  tags:['Flutter','FastAPI','RAG','LLM','PyTorch'],
+  links:[{en:'Live demo',es:'Probar demo',u:'https://aliassdev.github.io/Hackaton-DataForum-2026/'},{en:'Code',es:'Código',u:'https://github.com/Aliassdev/Hackaton-DataForum-2026'}]},
+ {id:'camin',cat:['ai','web'],big:1,award:0,title:'Camín',
+  ev:{en:'Hackathon TalentUO 2026, NTT Data challenge',es:'Hackathon TalentUO 2026, reto de NTT Data'},
+  d:{en:'Citizens report road incidents and a model classifies each one by severity, risk and the body that must act.',es:'La ciudadanía reporta incidencias en carretera y un modelo clasifica cada una por gravedad, riesgo y organismo responsable.'},
+  more:{en:'Laya, a fine-tuned multilingual encoder, scored 89.7% on severity with no critical case downgraded. Reports are enriched with live weather, DGT traffic and AEMET warnings and shown on a Leaflet map.',es:'Laya, un encoder multilingüe ajustado, logró un 89,7 % en gravedad sin rebajar ningún caso crítico. Los reportes se enriquecen con tiempo, tráfico de la DGT y avisos de AEMET en directo y se muestran en un mapa Leaflet.'},
+  tags:['Python','FastAPI','mmBERT','Leaflet'],
+  links:[{en:'Code',es:'Código',u:'https://github.com/Ikeruuu/asturcamin'}]},
+ {id:'merkle26',cat:['data'],award:1,title:'Sporting attendance model',titleEs:'Modelo de asistencia del Sporting',
+  ev:{en:'<b>Winner</b>, Datathon Merkle 2026',es:'<b>Ganador</b>, Datathon Merkle 2026'},
+  d:{en:'What drives attendance and merchandise sales at Real Sporting de Gijón, and a forecast for each match.',es:'Qué mueve la asistencia y las ventas de merchandising del Real Sporting de Gijón, y una previsión para cada partido.'},
+  more:{en:'A stacking regressor (Ridge, Random Forest, Gradient Boosting) plus a B2B idea: weekly crowd forecasts for local bars and shops.',es:'Un stacking (Ridge, Random Forest, Gradient Boosting) y una idea B2B: previsiones semanales de público para bares y tiendas de la zona.'},
+  tags:['Python','scikit-learn','Statistics'],
+  links:[{en:'Code',es:'Código',u:'https://github.com/Ikeruuu/Datathon_Merkle_2026'}]},
+ {id:'merkle25',cat:['data'],award:1,title:'Gijón car registrations',titleEs:'Matriculaciones en Gijón',
+  ev:{en:'<b>Winner</b>, Datathon Merkle 2025',es:'<b>Ganador</b>, Datathon Merkle 2025'},
+  d:{en:'Statistical analysis of Gijón vehicle data and a forecast of car registrations for the second half of 2022.',es:'Análisis estadístico de los vehículos de Gijón y previsión de matriculaciones para el segundo semestre de 2022.'},
+  more:{en:'An ensemble of several models trained on 2015–2022 data. Best presentation and best technical solution.',es:'Un ensemble de varios modelos entrenados con datos de 2015 a 2022. Mejor presentación y mejor solución técnica.'},
+  tags:['Python','Time series','Inference'],
+  links:[{en:'Code',es:'Código',u:'https://github.com/Ikeruuu/Datathon-Merkle-2025'}]},
+ {id:'habrok',cat:['hw'],award:0,title:'Habrok EVO',
+  ev:{en:'Uniovi eTech Racing, Formula Student',es:'Uniovi eTech Racing, Formula Student'},
+  d:{en:'Electric single-seater built from scratch by students. I designed PCBs and wiring for the low-voltage systems.',es:'Monoplaza eléctrico construido desde cero por estudiantes. Diseñé PCBs y cableado de los sistemas de baja tensión.'},
+  more:{en:'DC-DC converters and control boards in Altium Designer, plus workshop work on carbon-fibre layups and the undertray.',es:'Convertidores DC-DC y placas de control en Altium Designer, y trabajo de taller con fibra de carbono y el fondo plano.'},
+  tags:['Altium','PCB','Electronics'],links:[]},
+ {id:'quarks',cat:['ai'],award:0,title:'Quarks vs gluons CNN',titleEs:'CNN de quarks y gluones',
+  ev:{en:'Hackathon Ciencias IA 2025',es:'Hackathon Ciencias IA 2025'},
+  d:{en:'A convolutional network that classifies particle collisions, explained through a Telegram chatbot.',es:'Una red convolucional que clasifica colisiones de partículas, explicada mediante un chatbot de Telegram.'},
+  more:{en:'Trained on 1 million images and evaluated on 100,000 unseen ones, built in Keras.',es:'Entrenada con 1 millón de imágenes y evaluada con 100.000 nuevas, hecha en Keras.'},
+  tags:['Keras','CNN','Telegram bot'],
+  links:[{en:'Code',es:'Código',u:'https://github.com/Ikeruuu/CNN_model_CollisionOfQuarks_2025'}]},
+ {id:'xrandom',cat:['ai','data'],award:1,title:'XRandom',
+  ev:{en:'<b>3rd place</b>, Hackathon Blockchain 2024',es:'<b>3.er puesto</b>, Hackathon Blockchain 2024'},
+  d:{en:'Reads messages on X and Telegram to flag possible price swings in meme cryptocurrencies.',es:'Lee mensajes de X y Telegram para detectar posibles cambios de precio en criptomonedas meme.'},
+  more:{en:'Sentiment and keyword features feeding a predictive model. Honourable mention from Dextools.',es:'Variables de sentimiento y palabras clave que alimentan un modelo predictivo. Mención de honor de Dextools.'},
+  tags:['Python','NLP'],
+  links:[{en:'Code',es:'Código',u:'https://github.com/Ikeruuu/Prediction_model_meme_crypto_2024'}]},
+ {id:'nexus',cat:['biz'],award:1,title:'Nexus Lock',
+  ev:{en:'<b>1st</b>, Hackathon TalentUO 2024. <b>2nd</b>, Santander Awards',es:'<b>1.º</b>, Hackathon TalentUO 2024. <b>2.º</b>, Premios Santander'},
+  d:{en:'A secure app to share heavy, sensitive files, designed for Dogram with a subscription model.',es:'Una app segura para compartir archivos pesados y sensibles, diseñada para Dogram con un modelo de suscripción.'},
+  more:{en:'Brings chat, file transfer and project features into one place, secured with quantum cryptography.',es:'Reúne chat, transferencia de archivos y gestión de proyectos en un solo sitio, protegido con criptografía cuántica.'},
+  tags:['Product','Security','Business plan'],links:[]},
+ {id:'sic',cat:['ai','biz'],big:1,award:0,title:'SIC smart cameras',titleEs:'Cámaras inteligentes SIC',
+  ev:{en:'Uniovi Innovation Skills 2025, Izertis',es:'Uniovi Innovation Skills 2025, Izertis'},
+  d:{en:'Security cameras that detect falls, robberies and fires on the device itself, with no external servers.',es:'Cámaras de seguridad que detectan caídas, robos e incendios en el propio dispositivo, sin servidores externos.'},
+  more:{en:'A modified pre-trained CNN running on an NPU, plus a business plan, budget and web and app design.',es:'Una CNN preentrenada y modificada sobre una NPU, con plan de negocio, presupuesto y diseño web y de app.'},
+  tags:['Computer vision','NPU','Business plan'],links:[]},
+ {id:'client',cat:['web'],big:1,award:0,title:'Client work',titleEs:'Trabajo para clientes',
+  ev:{en:'Kodex Studio',es:'Kodex Studio'},
+  d:{en:'A Laravel setup with SageBridge to manage a database through AI, and dynamic websites with payment gateways.',es:'Un montaje en Laravel con SageBridge para gestionar una base de datos con IA y webs dinámicas con pasarelas de pago.'},
+  more:{en:'Client projects are private; ask me for a walkthrough.',es:'Los proyectos de clientes son privados; pídeme una demostración.'},
+  tags:['Laravel','AI','Payments'],links:[]}
+];
+const FILTERS=[{k:'all',en:'All',es:'Todo'},{k:'ai',en:'AI',es:'IA'},{k:'data',en:'Data',es:'Datos'},{k:'web',en:'Web & apps',es:'Web y apps'},{k:'hw',en:'Hardware',es:'Hardware'},{k:'biz',en:'Product & business',es:'Producto y negocio'}];
+/* Photos and clips for the film strip. Entries without src render as labelled empty frames. */
+const P=(window.ASSET_ROOT||'')+'assets/photos/';
+const PHOTOS=[
+ {src:P+'01-cliffs.jpg',w:4,h:3,cat:{en:'Landscape',es:'Paisaje'},place:{en:'Iceland',es:'Islandia'},alt:{en:'Golden fields under snow-streaked cliffs in low light',es:'Campos dorados bajo acantilados con restos de nieve y luz baja'}},
+ {src:P+'02-black-beach.jpg',w:3,h:4,cat:{en:'Landscape',es:'Paisaje'},place:{en:'Iceland',es:'Islandia'},alt:{en:'A lone figure on a black plain with patches of snow, sun behind the clouds',es:'Una figura sola en una llanura negra con manchas de nieve y el sol tras las nubes'}},
+ {src:P+'03-ice.jpg',w:3,h:4,cat:{en:'Nature',es:'Naturaleza'},place:{en:'Iceland',es:'Islandia'},alt:{en:'A gloved hand holding a block of clear ice against a glacier',es:'Una mano con guante sostiene un bloque de hielo transparente frente a un glaciar'}},
+ {src:P+'04-aurora-moon.jpg',w:4,h:3,cat:{en:'Night sky',es:'Nocturna'},place:{en:'Iceland',es:'Islandia'},alt:{en:'A green aurora crossing the sky next to the moon',es:'Una aurora verde cruza el cielo junto a la luna'}},
+ {src:P+'06-plane.jpg',w:4,h:3,cat:{en:'Travel',es:'Viajes'},place:{en:'Iceland',es:'Islandia'},alt:{en:'A person standing on a wrecked plane fuselage at blue hour',es:'Una persona de pie sobre el fuselaje de un avión abandonado en la hora azul'}},
+ {src:P+'07-waterfall-b.jpg',w:1307,h:1600,cat:{en:'Travel',es:'Viajes'},place:{en:'Iceland',es:'Islandia'},alt:{en:'A person with open arms under a waterfall inside a mossy gorge',es:'Una persona con los brazos abiertos bajo una cascada en una garganta cubierta de musgo'}},
+ {src:P+'05-aurora-car.jpg',w:16,h:9,cat:{en:'Night sky',es:'Nocturna'},place:{en:'Iceland',es:'Islandia'},alt:{en:'Someone sitting on a car roof watching the northern lights over a fjord',es:'Alguien sentado en el techo de un coche mirando la aurora boreal sobre un fiordo'}},
+ {src:P+'08-coast-tower.jpg',w:4,h:3,cat:{en:'Travel',es:'Viajes'},alt:{en:'A stone tower on a rocky headland above the sea, a boat passing below',es:'Una torre de piedra sobre un promontorio rocoso junto al mar, con un barco pasando'}},
+ {src:P+'09-madrid-night.jpg',w:3,h:4,cat:{en:'City',es:'Ciudad'},place:{en:'Madrid',es:'Madrid'},alt:{en:'A lit domed building at night, shot from the street',es:'Un edificio con cúpula iluminado de noche, visto desde la calle'}},
+ {src:P+'v1.mp4',poster:P+'v1.jpg',video:1,w:16,h:9,cat:{en:'Video',es:'Vídeo'},place:{en:'Madrid',es:'Madrid'},alt:{en:'Clip of a busy city avenue in warm afternoon light',es:'Clip de una avenida llena de gente con luz cálida de tarde'}},
+ {src:P+'v2.mp4',poster:P+'v2.jpg',video:1,w:4,h:3,cat:{en:'Video',es:'Vídeo'},place:{en:'Madrid',es:'Madrid'},alt:{en:'Clip of rowing boats on a park lake',es:'Clip de barcas de remos en el estanque de un parque'}},
+ {src:P+'v3.mp4',poster:P+'v3.jpg',video:1,w:4,h:3,cat:{en:'Video',es:'Vídeo'},place:{en:'Madrid',es:'Madrid'},alt:{en:'Clip inside a crowded iron-and-glass market hall',es:'Clip dentro de un mercado de hierro y cristal lleno de gente'}},
+ {src:P+'10-karting.jpg',w:4,h:3,cat:{en:'Sports',es:'Deportes'},alt:{en:'A racing kart taking a corner on an open track, mountains on the horizon',es:'Un kart de competición trazando una curva en un circuito abierto, con montañas al fondo'}},
+ {src:P+'11-football.jpg',w:3,h:2,cat:{en:'Sports',es:'Deportes'},alt:{en:'A footballer in a black kit on the pitch under the rain',es:'Un futbolista con equipación negra en el campo bajo la lluvia'}}
+];
+const ROW_A=['Python','FastAPI','Flutter','Laravel','PyTorch','RAG','scikit-learn','Docker','Power BI','Altium'];
+const ROW_B={en:['Landscape','Nature','Travel','Night sky','City','Sports','Events','Video','Editing'],es:['Paisaje','Naturaleza','Viajes','Nocturna','Ciudad','Deportes','Eventos','Vídeo','Edición']};

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Iker Argüelles · Projects, photography and CV</title>
+<meta name="description" content="Iker Argüelles: Data Science & Telecom Engineering student, AI and web/app developer, photographer and founder of Kodex Studio in Gijón.">
+<link rel="canonical" href="https://ikeruuu.github.io/kodex_studio/iker/">
+<meta name="theme-color" content="#EEF0EC">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Iker Argüelles · Projects, photography and CV">
+<meta property="og:description" content="Data science, AI, web and app projects, photography and CV of Iker Argüelles, founder of Kodex Studio in Gijón.">
+<meta property="og:url" content="https://ikeruuu.github.io/kodex_studio/iker/">
+<meta property="og:image" content="https://ikeruuu.github.io/kodex_studio/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/logo.png">
+<script>try{if(sessionStorage.getItem('wipe')==='1')document.documentElement.classList.add('arriving')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="bar" id="bar" aria-hidden="true"></div>
+<div class="wipe" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="../assets/logo.png" alt=""><span>Iker Argüelles</span></a>
+    <ul id="navList">
+      <li><a href="#projects"><span class="en">Projects</span><span class="es">Proyectos</span></a></li>
+      <li><a href="#photos"><span class="en">Photography</span><span class="es">Fotografía</span></a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a></li>
+      <li><a class="switch" href="../" data-switch>Kodex Studio</a></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+    <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="navList"><span class="en">Menu</span><span class="es">Menú</span></button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="k-spot" id="kHero" aria-hidden="true"></span>
+    <h1 id="name" aria-label="Iker Argüelles">Iker Argüelles</h1>
+    <p class="role"><span class="en">I turn data into models, models into apps, and landscapes into photographs. Engineering student and founder of Kodex Studio.</span><span class="es">Convierto datos en modelos, modelos en apps y paisajes en fotografías. Estudiante de ingeniería y fundador de Kodex Studio.</span></p>
+    <div class="cta">
+      <a class="btn solid-btn" href="#projects"><span class="en">See my projects</span><span class="es">Ver mis proyectos</span></a>
+      <a class="btn" href="#cv"><span class="en">Read my CV</span><span class="es">Ver mi CV</span></a>
+      <a class="btn" href="../" data-switch><span class="en">Work with Kodex Studio</span><span class="es">Trabajar con Kodex Studio</span></a>
+    </div>
+    <p class="where">Gijón, 43.53° N 5.66° W</p>
+  </div>
+</header>
+
+<main>
+<div class="strip solid" aria-hidden="true">
+  <div class="row" id="rowA"></div>
+  <div class="row cam" id="rowB"></div>
+</div>
+
+<section id="about" class="solid">
+  <div class="wrap about">
+    <div>
+      <div class="flip" id="flip">
+        <div class="flip-in">
+          <div class="face front"><img src="../assets/iker.jpg" alt="Iker Argüelles presenting with a microphone at Hackathon TalentUO" draggable="false"><i></i><i></i><i></i><i></i></div>
+          <div class="face back"><pre aria-label="Profile as code"><span class="k">const</span> iker = {
+  studies: <span class="s">"Data Science + Telecom"</span>,
+  based:   <span class="s">"Gijón, ES"</span>,
+  erasmus: <span class="s">"Politecnico di Milano"</span>,
+  stack:   [<span class="s">"Python"</span>, <span class="s">"FastAPI"</span>,
+            <span class="s">"Flutter"</span>, <span class="s">"Laravel"</span>],
+  camera:  [<span class="s">"landscape"</span>, <span class="s">"travel"</span>,
+            <span class="s">"sports"</span>],
+  wins:    <span class="k">3</span>, <span class="c">// hackathons, datathons</span>
+  studio:  <span class="s">"Kodex Studio"</span>,
+};</pre></div>
+        </div>
+      </div>
+      <button class="btn flip-btn" type="button" id="flipBtn" aria-pressed="false"><span class="en">Flip the card</span><span class="es">Girar la tarjeta</span></button>
+    </div>
+    <div>
+      <h2><span class="en">Engineer by training, photographer by habit</span><span class="es">Ingeniero de formación, fotógrafo por costumbre</span></h2>
+      <p class="lede"><span class="en">I study a dual degree in Data Science and Telecommunications Engineering in Gijón, and spent a year at Politecnico di Milano. I like building the whole thing: the model, the backend and the app people actually use.</span><span class="es">Estudio el doble grado de Ciencia de Datos e Ingeniería de Telecomunicación en Gijón, y pasé un año en el Politecnico di Milano. Me gusta construir el producto entero: el modelo, el backend y la app que usa la gente.</span></p>
+      <p><span class="en">Outside the terminal I carry a camera: mountains, coastlines, trips and races. Both come together in Kodex Studio, where I take on web, app and photography work.</span><span class="es">Fuera del terminal llevo una cámara: montañas, costa, viajes y carreras. Las dos cosas se juntan en Kodex Studio, donde hago trabajos de web, apps y fotografía.</span></p>
+      <dl class="facts">
+        <div><dt><span class="en">Studying</span><span class="es">Estudio</span></dt><dd>EPI Gijón, Universidad de Oviedo</dd></div>
+        <div><dt>Erasmus</dt><dd>Politecnico di Milano</dd></div>
+        <div><dt><span class="en">Competitions won</span><span class="es">Competiciones ganadas</span></dt><dd><span class="en">3, plus 2 podiums</span><span class="es">3, y 2 podios más</span></dd></div>
+        <div><dt><span class="en">Languages</span><span class="es">Idiomas</span></dt><dd><span class="en">Spanish, English C1, Italian</span><span class="es">Español, inglés C1, italiano</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="solid" style="padding-top:24px">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h2><span class="en">Things I've built</span><span class="es">Lo que he construido</span></h2>
+        <p class="lede"><span class="en">Hackathon apps, data competitions, a Formula Student car and client work. Open any card for the details.</span><span class="es">Apps de hackathon, competiciones de datos, un coche de Formula Student y trabajos para clientes. Abre cualquier tarjeta para ver los detalles.</span></p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="wins" class="solid" style="padding-top:24px">
+  <div class="wrap">
+    <div class="head"><h2><span class="en">Results</span><span class="es">Resultados</span></h2></div>
+    <ol class="timeline" id="timeline">
+      <span class="fill" aria-hidden="true"></span>
+      <li class="win"><time>Oct 2024</time><div><strong><span class="en">1st place, Hackathon TalentUO</span><span class="es">1.er puesto, Hackathon TalentUO</span></strong><span class="what">Nexus Lock, Banco Sabadell &amp; Universidad de Oviedo</span></div></li>
+      <li><time>Nov 2024</time><div><strong><span class="en">3rd place and honourable mention, Hackathon Blockchain</span><span class="es">3.er puesto y mención de honor, Hackathon Blockchain</span></strong><span class="what">XRandom, Dextools</span></div></li>
+      <li><time>Dec 2024</time><div><strong><span class="en">2nd place, Santander Entrepreneurship Awards</span><span class="es">2.º puesto, Premios Emprendimiento Santander</span></strong><span class="what">Nexus Lock, Banco Santander</span></div></li>
+      <li class="win"><time>Apr 2025</time><div><strong><span class="en">Winning team, Datathon Merkle 2025</span><span class="es">Equipo ganador, Datathon Merkle 2025</span></strong><span class="what"><span class="en">Best presentation and best technical solution</span><span class="es">Mejor presentación y mejor solución técnica</span></span></div></li>
+      <li class="win"><time>Jun 2026</time><div><strong><span class="en">Winning team, Datathon Merkle 2026</span><span class="es">Equipo ganador, Datathon Merkle 2026</span></strong><span class="what"><span class="en">Best prediction model, with Real Sporting de Gijón data</span><span class="es">Mejor modelo de predicción, con datos del Real Sporting de Gijón</span></span></div></li>
+      <li><time>Jun 2026</time><div><strong><span class="en">Laude in Models and Inference of Statistics</span><span class="es">Laude en Models and Inference of Statistics</span></strong><span class="what">Politecnico di Milano</span></div></li>
+      <li><time>Oct 2026</time><div><strong><span class="en">Semifinalist, DATAthon Justicia</span><span class="es">Semifinalista, DATAthon Justicia</span></strong><span class="what">TuTurno, A Coruña</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="photos" class="reel">
+  <div class="reel-pin">
+    <div class="wrap">
+      <h2><span class="en">Behind the camera</span><span class="es">Detrás de la cámara</span></h2>
+      <p class="lede"><span class="en">Landscape, nature and travel first; races and events when there is one nearby. More on Instagram at <a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a>.</span><span class="es">Paisaje, naturaleza y viajes ante todo; carreras y eventos cuando hay uno cerca. Más en Instagram, en <a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a>.</span></p>
+    </div>
+    <div class="film-scroll"><div class="film" id="film"></div></div>
+  </div>
+</section>
+
+<section class="studio teaser" id="studio" data-scene-b>
+  <div class="wrap">
+    <div class="studio-top">
+      <img id="kStudio" src="../assets/logo.png" alt="Kodex Studio logo">
+      <div>
+        <h2>Kodex Studio</h2>
+        <p class="tag"><em>Code &amp; camera.</em> <span class="en">Websites, apps and photos for brands that want to stand out.</span><span class="es">Webs, apps y fotos para marcas que quieren destacar.</span></p>
+      </div>
+    </div>
+    <p class="lede"><span class="en">My freelance studio has its own page, with what I build, how I work and the plans with fixed prices.</span><span class="es">Mi estudio freelance tiene su propia página, con lo que hago, cómo trabajo y los planes con precio fijo.</span></p>
+    <div class="cta">
+      <a class="btn solid-btn" href="../" data-switch><span class="en">Go to Kodex Studio</span><span class="es">Ir a Kodex Studio</span></a>
+      <a class="btn" href="../#plans" data-switch><span class="en">See plans and prices</span><span class="es">Ver planes y precios</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="cv" class="solid">
+  <div class="wrap">
+    <div class="head cv-head">
+      <div>
+        <h2><span class="en">Curriculum vitae</span><span class="es">Currículum</span></h2>
+        <p class="lede"><span class="en">The one-page version of everything above.</span><span class="es">La versión en una página de todo lo anterior.</span></p>
+      </div>
+    </div>
+    <div class="cv-stage">
+      <article class="sheet" id="sheet">
+        <header>
+          <div>
+            <h3>Iker Argüelles Eduarte</h3>
+            <div class="sub"><span class="en">Data Science &amp; Telecommunications Engineering student. AI, web and app developer.</span><span class="es">Estudiante de Ciencia de Datos e Ingeniería de Telecomunicación. Desarrollador de IA, web y apps.</span></div>
+          </div>
+          <ul class="reach">
+            <li>arguellesiker@gmail.com</li>
+            <li>linkedin.com/in/iker-arguelles</li>
+            <li>github.com/Ikeruuu</li>
+            <li>Gijón, Asturias</li>
+          </ul>
+        </header>
+        <div class="cv-cols">
+          <div>
+            <h4><span class="en">Experience</span><span class="es">Experiencia</span></h4>
+            <div class="job">
+              <div class="t"><span><span class="en">Freelance developer and photographer</span><span class="es">Desarrollador y fotógrafo freelance</span></span><span><span class="en">2022 – present</span><span class="es">2022 – actualidad</span></span></div>
+              <div class="o">Kodex Studio, Gijón</div>
+              <ul>
+                <li><span class="en">Websites with payment gateways and a Laravel setup that manages a database through AI.</span><span class="es">Webs con pasarelas de pago y un montaje en Laravel que gestiona una base de datos con IA.</span></li>
+                <li><span class="en">Landscape, nature, sports and event photography, shot and edited.</span><span class="es">Fotografía de paisaje, naturaleza, deportes y eventos, con edición.</span></li>
+              </ul>
+            </div>
+            <div class="job">
+              <div class="t"><span><span class="en">Data analysis intern</span><span class="es">Prácticas de análisis de datos</span></span><span><span class="en">Jul 2024, Jul 2025</span><span class="es">jul. 2024, jul. 2025</span></span></div>
+              <div class="o">TotalEnergies, Oviedo</div>
+              <ul>
+                <li><span class="en">Built predictive models of customer churn.</span><span class="es">Modelos predictivos de baja de clientes (churn).</span></li>
+                <li><span class="en">Validated incident and litigation databases with Excel, Power BI and SAS for the annual CNMC report.</span><span class="es">Validación de bases de datos de incidencias y litigios con Excel, Power BI y SAS para el informe anual a la CNMC.</span></li>
+              </ul>
+            </div>
+            <div class="job">
+              <div class="t"><span><span class="en">Low-voltage electronics</span><span class="es">Electrónica de baja tensión</span></span><span><span class="en">Feb 2025 – Sep 2026</span><span class="es">feb. 2025 – sept. 2026</span></span></div>
+              <div class="o">Uniovi eTech Racing (Formula Student)</div>
+              <ul><li><span class="en">Designed PCBs and wiring for the Habrok EVO single-seater in Altium Designer.</span><span class="es">Diseño de PCBs y cableado del monoplaza Habrok EVO en Altium Designer.</span></li></ul>
+            </div>
+            <div class="job">
+              <div class="t"><span><span class="en">Project manager and web designer</span><span class="es">Project manager y diseño web</span></span><span><span class="en">Feb 2025 – present</span><span class="es">feb. 2025 – actualidad</span></span></div>
+              <div class="o">AsturTalent Uniovi, <a href="https://www.asturtalent.org/">asturtalent.org</a></div>
+              <ul><li><span class="en">Co-organised the first Consulting Hackathon at the University of Oviedo and built the association's website.</span><span class="es">Coorganización del primer Hackathon de Consultoría de la Universidad de Oviedo y web de la asociación.</span></li></ul>
+            </div>
+            <div class="job">
+              <div class="t"><span><span class="en">Student representative</span><span class="es">Representante de estudiantes</span></span><span><span class="en">2023 – present</span><span class="es">2023 – actualidad</span></span></div>
+              <div class="o">EPI Gijón</div>
+              <ul><li><span class="en">Student Council, delegation secretary and School Board member.</span><span class="es">Consejo de Estudiantes, secretario de la delegación y miembro de la Junta de Escuela.</span></li></ul>
+            </div>
+
+            <h4><span class="en">Education</span><span class="es">Formación</span></h4>
+            <div class="job">
+              <div class="t"><span><span class="en">Dual degree: Data Science &amp; Engineering and Telecommunications Engineering</span><span class="es">Doble grado: Ciencia e Ingeniería de Datos e Ingeniería de Telecomunicación</span></span><span><span class="en">2023 – present</span><span class="es">2023 – actualidad</span></span></div>
+              <div class="o">EPI Gijón, Universidad de Oviedo. <span class="en">Five honours on record: three at EPI, including Advanced Programming, plus the Politecnico laude, which counts as two.</span><span class="es">Cinco matrículas de honor en el expediente: tres en la EPI, entre ellas Programación Avanzada, y la laude del Politecnico, que computa como dos.</span></div>
+            </div>
+            <div class="job">
+              <div class="t"><span><span class="en">Erasmus year, Computer Science and Telecommunications</span><span class="es">Año de Erasmus, Computer Science y Telecomunicaciones</span></span><span>2025 – 2026</span></div>
+              <div class="o">Politecnico di Milano. 23.76/30, <span class="en">Laude in Models and Inference of Statistics.</span><span class="es">Laude en Models and Inference of Statistics.</span></div>
+            </div>
+            <div class="job">
+              <div class="t"><span><span class="en">Bachillerato, Science and Technology</span><span class="es">Bachillerato científico-tecnológico</span></span><span>2023</span></div>
+              <div class="o">Colegio de la Asunción, Gijón. <span class="en">10/10 average.</span><span class="es">Media de 10.</span></div>
+            </div>
+          </div>
+          <div>
+            <h4><span class="en">Skills</span><span class="es">Aptitudes</span></h4>
+            <ul class="plain">
+              <li><b><span class="en">AI and data</span><span class="es">IA y datos</span></b><br>Python, scikit-learn, PyTorch, Keras, RAG, NLP, <span class="en">time series</span><span class="es">series temporales</span></li>
+              <li><b><span class="en">Web and apps</span><span class="es">Web y apps</span></b><br>FastAPI, Flutter, Laravel, HTML/CSS, Docker</li>
+              <li><b><span class="en">Data and BI</span><span class="es">Datos y BI</span></b><br>Power BI, Excel, SAS, R</li>
+              <li><b><span class="en">Electronics</span><span class="es">Electrónica</span></b><br>Altium Designer, <span class="en">PCB design</span><span class="es">diseño de PCB</span>, LTSpice</li>
+              <li><b><span class="en">Photography</span><span class="es">Fotografía</span></b><br>Adobe Photoshop</li>
+            </ul>
+            <h4><span class="en">Awards</span><span class="es">Premios</span></h4>
+            <ul class="plain">
+              <li><span class="en">Winner, Datathon Merkle 2025 and 2026</span><span class="es">Ganador, Datathon Merkle 2025 y 2026</span></li>
+              <li><span class="en">1st, Hackathon TalentUO 2024</span><span class="es">1.º, Hackathon TalentUO 2024</span></li>
+              <li><span class="en">2nd, Santander Entrepreneurship Awards 2024</span><span class="es">2.º, Premios Emprendimiento Santander 2024</span></li>
+              <li><span class="en">3rd, Hackathon Blockchain 2024</span><span class="es">3.º, Hackathon Blockchain 2024</span></li>
+              <li><span class="en">Semifinalist, DATAthon Justicia 2026</span><span class="es">Semifinalista, DATAthon Justicia 2026</span></li>
+            </ul>
+            <h4><span class="en">Languages</span><span class="es">Idiomas</span></h4>
+            <ul class="plain">
+              <li><span class="en">Spanish, native</span><span class="es">Español, nativo</span></li>
+              <li><span class="en">English, C1 (Cambridge Advanced, 190)</span><span class="es">Inglés, C1 (Cambridge Advanced, 190)</span></li>
+              <li><span class="en">Italian and French, basic</span><span class="es">Italiano y francés, básico</span></li>
+            </ul>
+            <h4><span class="en">Certificates</span><span class="es">Certificados</span></h4>
+            <ul class="plain">
+              <li>AWS Knowledge: Serverless (2024)</li>
+              <li>Cisco Networking Basics (2024)</li>
+            </ul>
+            <h4><span class="en">Volunteering</span><span class="es">Voluntariado</span></h4>
+            <ul class="plain">
+              <li><span class="en">Speaker at the University of Oviedo open days, 2024 and 2025</span><span class="es">Ponente en las jornadas de orientación de la Universidad de Oviedo, 2024 y 2025</span></li>
+              <li><span class="en">Mentor for new students</span><span class="es">Mentor de estudiantes de nuevo ingreso</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="cv-actions">
+      <button class="btn solid-btn" type="button" id="printBtn"><span class="en">Save as PDF</span><span class="es">Guardar como PDF</span></button>
+      <a class="btn" href="https://www.linkedin.com/in/iker-arguelles/"><span class="en">See it on LinkedIn</span><span class="es">Verlo en LinkedIn</span></a>
+    </div>
+    <p class="cv-note"><span class="en">"Save as PDF" opens your browser's print dialog with only the CV.</span><span class="es">«Guardar como PDF» abre el diálogo de impresión del navegador solo con el CV.</span></p>
+  </div>
+</section>
+
+<section id="contact" class="solid" style="padding-top:24px">
+  <div class="wrap contact">
+    <div>
+      <h2><span class="en">Let's talk</span><span class="es">Hablemos</span></h2>
+      <p class="lede"><span class="en">For internships, projects or a quote, write to me.</span><span class="es">Para prácticas, proyectos o un presupuesto, escríbeme.</span></p>
+    </div>
+    <ul>
+      <li><span>Email</span><a href="mailto:arguellesiker@gmail.com">arguellesiker@gmail.com</a></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/iker-arguelles/">in/iker-arguelles</a></li>
+      <li><span>GitHub</span><a href="https://github.com/Ikeruuu">github.com/Ikeruuu</a></li>
+      <li><span>Instagram</span><a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a></li>
+      <li><span class="en">Studio</span><span class="es">Estudio</span><a href="../" data-switch>Kodex Studio</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+<footer class="solid"><div class="wrap">© 2026 Iker Argüelles, Gijón</div></footer>
+
+<dialog id="lb" aria-label="Photo viewer">
+  <div class="lb-in"><div id="lbMedia"></div><p id="lbCap"></p></div>
+  <button class="x" type="button" id="lbX"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span class="en" style="position:absolute;clip:rect(0 0 0 0)">Close</span><span class="es" style="position:absolute;clip:rect(0 0 0 0)">Cerrar</span></button>
+  <button class="prev" type="button" id="lbPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="en" style="position:absolute;clip:rect(0 0 0 0)">Previous</span><span class="es" style="position:absolute;clip:rect(0 0 0 0)">Anterior</span></button>
+  <button class="next" type="button" id="lbNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span class="en" style="position:absolute;clip:rect(0 0 0 0)">Next</span><span class="es" style="position:absolute;clip:rect(0 0 0 0)">Siguiente</span></button>
+</dialog>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>window.ASSET_ROOT="../"</script>
+<script src="../js/data.js"></script>
+<script src="../js/site.js"></script>
+<script src="../js/scene.js"></script>
+<script src="../js/switch.js"></script>
+</body>
+</html>
