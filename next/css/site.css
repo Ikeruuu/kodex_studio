@@ -282,3 +282,84 @@ html.nav-dark .nav ul a.switch:hover{background:var(--on-night);color:var(--nigh
 html.arriving.reveal .wipe{transform:translateX(135%) skewX(-14deg);transition:transform .55s cubic-bezier(.7,0,.3,1)}
 
 @media print{.wipe{display:none}}
+
+/* ============ motion layer: same extras as the studio page, on this page's own look ============
+   Everything that hides content until it is revealed sits under html.fx, a class js/site.js adds
+   only when motion is allowed, so nothing stays hidden without it. */
+
+/* loading screen: the white K turning on the dark background */
+.loader{display:none}
+html.loading .loader{position:fixed;inset:0;z-index:90;background:#0E1014;display:grid;place-items:center;align-content:center;gap:44px;perspective:900px;animation:loaderOut .7s cubic-bezier(.7,0,.3,1) 7s forwards}
+.k3d-tilt{transform-style:preserve-3d;transform:rotateX(-14deg)}
+.k3d{position:relative;width:132px;height:132px;transform-style:preserve-3d;animation:kSpin 2.2s linear infinite}
+.k3d svg{position:absolute;inset:0;width:100%;height:100%;transform:translateZ(calc((var(--z) - 10.5)*1.15px));fill:#7E8592}
+.k3d svg:first-child,.k3d svg:last-child{fill:#fff}
+@keyframes kSpin{to{transform:rotateY(360deg)}}
+.lbar{width:132px;height:2px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden}
+.lbar i{display:block;height:100%;background:#fff;transform-origin:0 50%;transform:scaleX(0);animation:lbar 3.2s cubic-bezier(.1,.7,.2,1) forwards}
+@keyframes lbar{to{transform:scaleX(.86)}}
+html.loaded .lbar i{animation:none;transform:scaleX(1);transition:transform .3s}
+html.loaded .k3d-tilt{transform:rotateX(-14deg) scale(1.5);opacity:0;transition:transform .6s cubic-bezier(.7,0,.3,1),opacity .45s .1s}
+html.loading.loaded .loader{animation:loaderOut .7s cubic-bezier(.7,0,.3,1) .25s forwards}
+@keyframes loaderOut{to{clip-path:inset(0 0 100% 0);visibility:hidden}}
+
+/* hero: the text follows the name in, and the block lifts away as you scroll */
+.hero{position:relative}
+html.fx .hero .role,html.fx .hero .cta,html.fx .hero .where{opacity:0;transform:translate3d(0,26px,0);filter:blur(8px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1),filter .9s}
+html.fx .hero.go .role,html.fx .hero.go .cta,html.fx .hero.go .where{opacity:1;transform:none;filter:none}
+html.fx .hero.go .role{transition-delay:.6s}html.fx .hero.go .cta{transition-delay:.75s}html.fx .hero.go .where{transition-delay:.9s}
+html.fx .hero .wrap{transform:translate3d(0,calc(var(--hp,0)*70px),0);opacity:calc(1 - var(--hp,0)*1.25)}
+.cue{display:none}
+html.fx .cue{display:block;position:absolute;left:50%;bottom:26px;width:1px;height:56px;background:rgba(22,24,29,.16);overflow:hidden;opacity:calc(1 - var(--hp,0)*4)}
+html.fx .cue i{position:absolute;left:0;top:0;width:100%;height:40%;background:var(--code);animation:cue 1.8s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes cue{from{transform:translateY(-110%)}to{transform:translateY(260%)}}
+
+/* blocks arrive as they enter the screen */
+html.fx .rv{opacity:0;transform:translate3d(0,44px,0) scale(.985);filter:blur(10px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1),filter .9s;transition-delay:calc(var(--i,0)*90ms)}
+html.fx .rv.side{transform:perspective(1200px) translate3d(-56px,0,0) rotateY(16deg)}
+html.fx .rv.in{opacity:1;transform:none;filter:none}
+html.fx .stagger>*{opacity:0;transform:translate3d(0,34px,0);filter:blur(8px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1),filter .8s}
+html.fx .stagger.in>*{opacity:1;transform:none;filter:none}
+html.fx .stagger.in>:nth-child(2){transition-delay:.09s}html.fx .stagger.in>:nth-child(3){transition-delay:.18s}html.fx .stagger.in>:nth-child(4){transition-delay:.27s}html.fx .stagger.in>:nth-child(5){transition-delay:.36s}html.fx .stagger.in>:nth-child(6){transition-delay:.45s}
+html.fx h2.rvh{clip-path:inset(0 0 100% 0);transform:translateY(40px);transition:clip-path 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+html.fx h2.rvh.in{clip-path:inset(-10% -4% -22% -4%);transform:none}
+
+/* light that drifts behind each section as it passes */
+html.fx main>section.solid{position:relative}
+@supports (overflow:clip){html.fx #about,html.fx #wins,html.fx #contact{overflow:clip}}
+html.fx main>section.solid::before,html.fx main>section.solid::after{content:"";position:absolute;border-radius:50%;pointer-events:none;z-index:0;will-change:transform}
+html.fx main>section.solid::before{width:720px;height:720px;left:-270px;top:4%;background:radial-gradient(closest-side,rgba(36,64,230,.085),transparent);transform:translate3d(0,calc(var(--sy,0)*-90px),0)}
+html.fx main>section.solid::after{width:640px;height:640px;right:-250px;bottom:0;background:radial-gradient(closest-side,rgba(232,163,58,.13),transparent);transform:translate3d(0,calc(var(--sy,0)*110px),0)}
+html.fx main>section.solid:nth-of-type(even)::before{left:auto;right:-280px}
+html.fx main>section.solid:nth-of-type(even)::after{right:auto;left:-250px}
+html.fx main>section.solid>.wrap{position:relative;z-index:1}
+
+/* the photo card leans once to show it can be turned */
+html.fx .flip.hint:not(.flipped) .flip-in{animation:peek 1.5s cubic-bezier(.4,0,.2,1) .7s}
+@keyframes peek{0%,100%{transform:rotateY(0)}35%{transform:rotateY(-26deg)}65%{transform:rotateY(10deg)}}
+
+/* project cards: softer arrival, a pop when the filter changes, details that slide open */
+html.fx .proj.pre{filter:blur(8px)}
+html.fx .proj:not(.tilting){transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s,filter .7s,box-shadow .3s}
+html.fx .proj.pop{animation:projIn .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*55ms)}
+@keyframes projIn{from{opacity:0;transform:translateY(26px) scale(.97);filter:blur(6px)}}
+html.fx .proj.open .detail{animation:detailIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes detailIn{from{opacity:0;transform:translateY(-8px)}}
+
+/* results: each line comes forward when the timeline reaches it */
+html.fx .timeline li>time,html.fx .timeline li>div{opacity:.3;transform:translateX(14px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
+html.fx .timeline li.on>time,html.fx .timeline li.on>div{opacity:1;transform:none}
+
+/* film: frames rise in one after another, and each photo slides a little inside its frame as the strip moves */
+html.fx .frame{opacity:0;translate:0 70px;transition:opacity .8s,translate .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+html.fx .film.in .frame{opacity:1;translate:0 0}
+html.fx .frame img,html.fx .frame video{transform:none;translate:calc(var(--px,0)*-28px) 0;scale:1.13;transition:scale .7s cubic-bezier(.2,.8,.2,1)}
+html.fx .frame:hover img,html.fx .frame:hover video{transform:none;scale:1.18}
+
+/* buttons lean towards the pointer; contact rows shift on hover */
+.btn{transition:background-color .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.8,.2,1)}
+.contact li{transition:padding .35s cubic-bezier(.2,.8,.2,1),border-color .35s}
+@media (hover:hover){.contact li:hover{padding-left:12px;border-color:var(--ink)}}
+
+@media (prefers-reduced-motion:reduce){.loader,.cue{display:none!important}}
+@media print{.loader,.cue{display:none!important}}
