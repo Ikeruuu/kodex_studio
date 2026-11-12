@@ -50,10 +50,12 @@
   const p1=new THREE.PointLight(0x2440E6,2.2,30); p1.position.set(-4,3,5); scene.add(p1);
   const p2=new THREE.PointLight(0xE8A33A,1.4,30); p2.position.set(7,1,4); scene.add(p2);
 
-  const hero=$('.hero'), studio=$('#studio'), kHero=$('#kHero'), kStudio=$('#kStudio');
+  const hero=$('.hero'), studio=$('[data-scene-b]'), kHero=$('#kHero'), kStudio=$('#kStudio');
+  const NIGHT=document.documentElement.dataset.scene==='studio'; /* the Kodex Studio page is always dark */
   const ray=new THREE.Vector3(), fwd=new THREE.Vector3();
   /* put the K where a DOM box is: cast a ray through the box centre onto the z=0 plane */
   function anchor(el){
+    if(!el){K.visible=false;return}
     const r=el.getBoundingClientRect();
     if(!r.width||r.bottom<-40||r.top>H+40){K.visible=false;return}
     camera.updateMatrixWorld();
@@ -77,11 +79,11 @@
   function frame(now){
     requestAnimationFrame(frame);
     if(document.hidden)return;
-    const hr=hero.getBoundingClientRect(), sr=studio.getBoundingClientRect();
+    const hr=hero.getBoundingClientRect(), sr=studio?studio.getBoundingClientRect():{top:1e9,bottom:1e9,height:1};
     const heroVis=hr.bottom>0, studioVis=sr.top<H&&sr.bottom>0;
     if(!heroVis&&!studioVis){if(shown){canvas.style.visibility='hidden';shown=false}return}
     if(!shown){canvas.style.visibility='visible';shown=true}
-    theme(heroVis?0:1);
+    theme(NIGHT||!heroVis?1:0);
     const t=REDUCE?0:(now-t0)/1000;
     px+=(tx-px)*.06; py+=(ty-py)*.06;
     const p=heroVis?clamp(-hr.top/Math.max(1,hr.height)):0;         // hero scroll progress

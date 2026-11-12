@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-scene="studio">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Iker Argüelles · Kodex Studio</title>
-<meta name="description" content="Iker Argüelles: Data Science & Telecom Engineering student, AI and web/app developer, photographer and founder of Kodex Studio in Gijón.">
+<title>Kodex Studio · Websites, apps and photography in Gijón</title>
+<meta name="description" content="Kodex Studio: websites, online shops, custom apps and photography for small businesses. Fixed prices, payment in two halves and support after delivery.">
 <link rel="canonical" href="https://ikeruuu.github.io/kodex_studio/">
-<meta name="theme-color" content="#EEF0EC">
+<meta name="theme-color" content="#16181D">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Iker Argüelles · Kodex Studio">
-<meta property="og:description" content="Data science, AI, web and app projects, photography and CV of Iker Argüelles, founder of Kodex Studio in Gijón.">
+<meta property="og:title" content="Kodex Studio · Code &amp; camera">
+<meta property="og:description" content="Websites, online shops, custom apps and photography for small businesses. Fixed prices, payment in two halves and support after delivery.">
 <meta property="og:url" content="https://ikeruuu.github.io/kodex_studio/">
 <meta property="og:image" content="https://ikeruuu.github.io/kodex_studio/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logo.png">
+<script>try{var d=document.documentElement;if(sessionStorage.getItem('wipe')==='1')d.classList.add('arriving');else if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('loading');if(sessionStorage.getItem('intro')==='1')d.classList.add('seen');sessionStorage.setItem('intro','1')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/studio.css">
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
-<div class="bar" id="bar" aria-hidden="true"></div>
+<div class="wipe" aria-hidden="true"></div>
+<div class="loader" id="loader" aria-hidden="true"><div class="k3d-tilt"><div class="k3d"><svg viewBox="200 200 520 520" style="--z:0"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:1"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:2"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:3"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:4"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:5"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:6"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:7"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:8"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:9"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:10"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:11"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:12"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:13"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:14"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:15"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:16"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:17"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:18"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:19"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:20"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg><svg viewBox="200 200 520 520" style="--z:21"><polygon points="242,240 346,240 346,478 552,240 678,240 503,462 678,680 546,680 432,545 346,645 346,680 242,680"/></svg></div></div><span class="lbar"><i></i></span></div>
+<div class="bar" aria-hidden="true"></div>
 
 <nav class="nav" id="nav" aria-label="Main">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="assets/logo.png" alt=""><span>Iker Argüelles</span></a>
+    <a class="brand" href="#top"><img src="assets/logo.png" alt=""><span>Kodex Studio</span></a>
     <ul id="navList">
-      <li><a href="#projects"><span class="en">Projects</span><span class="es">Proyectos</span></a></li>
-      <li><a href="#photos"><span class="en">Photography</span><span class="es">Fotografía</span></a></li>
-      <li><a href="#studio">Kodex Studio</a></li>
-      <li><a href="#cv">CV</a></li>
+      <li><a href="#services"><span class="en">Services</span><span class="es">Servicios</span></a></li>
+      <li><a href="#tech"><span class="en">Technology</span><span class="es">Tecnología</span></a></li>
+      <li><a href="#process"><span class="en">How we work</span><span class="es">Cómo trabajamos</span></a></li>
+      <li><a href="#plans"><span class="en">Plans</span><span class="es">Planes</span></a></li>
       <li><a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a></li>
+      <li class="only-menu"><a href="iker/" data-switch><span class="en">About Iker</span><span class="es">Sobre Iker</span></a></li>
     </ul>
+    <a class="switch top" href="iker/" data-switch><span class="en">About Iker</span><span class="es">Sobre Iker</span></a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" aria-pressed="true">EN</button>
       <button type="button" data-lang="es" aria-pressed="false">ES</button>
@@ -46,265 +51,200 @@
 <header class="hero" id="top">
   <div class="wrap">
     <span class="k-spot" id="kHero" aria-hidden="true"></span>
-    <h1 id="name" aria-label="Iker Argüelles">Iker Argüelles</h1>
-    <p class="role"><span class="en">I turn data into models, models into apps, and landscapes into photographs. Engineering student and founder of Kodex Studio.</span><span class="es">Convierto datos en modelos, modelos en apps y paisajes en fotografías. Estudiante de ingeniería y fundador de Kodex Studio.</span></p>
+    <p class="prompt" aria-hidden="true">~/kodex-studio $ <span id="typed"></span><span class="cur">_</span></p>
+    <h1><span class="en">Websites, apps and photos for businesses that want to be seen.</span><span class="es">Webs, apps y fotos para negocios que quieren que se les vea.</span></h1>
+    <p class="lede"><span class="en">A freelance studio in Gijón. You get a closed price, you pay in two halves and we stay with you after delivery.</span><span class="es">Un estudio freelance en Gijón. Tienes un precio cerrado, pagas en dos mitades y seguimos contigo después de la entrega.</span></p>
     <div class="cta">
-      <a class="btn solid-btn" href="#projects"><span class="en">See my projects</span><span class="es">Ver mis proyectos</span></a>
-      <a class="btn" href="#cv"><span class="en">Read my CV</span><span class="es">Ver mi CV</span></a>
-      <a class="btn" href="#studio"><span class="en">Work with Kodex Studio</span><span class="es">Trabajar con Kodex Studio</span></a>
+      <a class="btn main" href="#plans"><span class="en">See plans and prices</span><span class="es">Ver planes y precios</span></a>
+      <a class="btn" href="#contact"><span class="en">Tell us about your project</span><span class="es">Cuéntanos tu proyecto</span></a>
     </div>
-    <p class="where">Gijón, 43.53° N 5.66° W</p>
+    <ul class="promises">
+      <li><span class="en">Fixed price, not hourly</span><span class="es">Precio fijo, no por horas</span></li>
+      <li><span class="en">50% to start, 50% on delivery</span><span class="es">50 % al empezar, 50 % al entregar</span></li>
+      <li><span class="en">30 days of support included</span><span class="es">30 días de soporte incluidos</span></li>
+    </ul>
   </div>
+  <span class="cue" aria-hidden="true"><i></i></span>
 </header>
 
 <main>
-<div class="strip solid" aria-hidden="true">
-  <div class="row" id="rowA"></div>
-  <div class="row cam" id="rowB"></div>
-</div>
-
-<section id="about" class="solid">
-  <div class="wrap about">
-    <div>
-      <div class="flip" id="flip">
-        <div class="flip-in">
-          <div class="face front"><img src="assets/iker.jpg" alt="Iker Argüelles presenting with a microphone at Hackathon TalentUO" draggable="false"><i></i><i></i><i></i><i></i></div>
-          <div class="face back"><pre aria-label="Profile as code"><span class="k">const</span> iker = {
-  studies: <span class="s">"Data Science + Telecom"</span>,
-  based:   <span class="s">"Gijón, ES"</span>,
-  erasmus: <span class="s">"Politecnico di Milano"</span>,
-  stack:   [<span class="s">"Python"</span>, <span class="s">"FastAPI"</span>,
-            <span class="s">"Flutter"</span>, <span class="s">"Laravel"</span>],
-  camera:  [<span class="s">"landscape"</span>, <span class="s">"travel"</span>,
-            <span class="s">"sports"</span>],
-  wins:    <span class="k">3</span>, <span class="c">// hackathons, datathons</span>
-  studio:  <span class="s">"Kodex Studio"</span>,
-};</pre></div>
-        </div>
-      </div>
-      <button class="btn flip-btn" type="button" id="flipBtn" aria-pressed="false"><span class="en">Flip the card</span><span class="es">Girar la tarjeta</span></button>
-    </div>
-    <div>
-      <h2><span class="en">Engineer by training, photographer by habit</span><span class="es">Ingeniero de formación, fotógrafo por costumbre</span></h2>
-      <p class="lede"><span class="en">I study a dual degree in Data Science and Telecommunications Engineering in Gijón, and spent a year at Politecnico di Milano. I like building the whole thing: the model, the backend and the app people actually use.</span><span class="es">Estudio el doble grado de Ciencia de Datos e Ingeniería de Telecomunicación en Gijón, y pasé un año en el Politecnico di Milano. Me gusta construir el producto entero: el modelo, el backend y la app que usa la gente.</span></p>
-      <p><span class="en">Outside the terminal I carry a camera: mountains, coastlines, trips and races. Both come together in Kodex Studio, where I take on web, app and photography work.</span><span class="es">Fuera del terminal llevo una cámara: montañas, costa, viajes y carreras. Las dos cosas se juntan en Kodex Studio, donde hago trabajos de web, apps y fotografía.</span></p>
-      <dl class="facts">
-        <div><dt><span class="en">Studying</span><span class="es">Estudio</span></dt><dd>EPI Gijón, Universidad de Oviedo</dd></div>
-        <div><dt>Erasmus</dt><dd>Politecnico di Milano</dd></div>
-        <div><dt><span class="en">Competitions won</span><span class="es">Competiciones ganadas</span></dt><dd><span class="en">3, plus 2 podiums</span><span class="es">3, y 2 podios más</span></dd></div>
-        <div><dt><span class="en">Languages</span><span class="es">Idiomas</span></dt><dd><span class="en">Spanish, English C1, Italian</span><span class="es">Español, inglés C1, italiano</span></dd></div>
-      </dl>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="solid" style="padding-top:24px">
+<div class="band solid" aria-hidden="true"><div class="band-row" id="bandA"></div></div>
+<section id="services" class="solid">
   <div class="wrap">
     <div class="head">
-      <div>
-        <h2><span class="en">Things I've built</span><span class="es">Lo que he construido</span></h2>
-        <p class="lede"><span class="en">Hackathon apps, data competitions, a Formula Student car and client work. Open any card for the details.</span><span class="es">Apps de hackathon, competiciones de datos, un coche de Formula Student y trabajos para clientes. Abre cualquier tarjeta para ver los detalles.</span></p>
-      </div>
-      <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+      <p class="path">~/kodex-studio/services</p>
+      <h2><span class="en">What we build, working</span><span class="es">Lo que hacemos, funcionando</span></h2>
+      <p class="lede"><span class="en">Five small demos you can touch. Each one is a simplified version of a real kind of project.</span><span class="es">Cinco demos pequeñas que puedes tocar. Cada una es una versión simplificada de un tipo de encargo real.</span></p>
     </div>
-    <div class="grid" id="grid"></div>
-  </div>
-</section>
-
-<section id="wins" class="solid" style="padding-top:24px">
-  <div class="wrap">
-    <div class="head"><h2><span class="en">Results</span><span class="es">Resultados</span></h2></div>
-    <ol class="timeline" id="timeline">
-      <span class="fill" aria-hidden="true"></span>
-      <li class="win"><time>Oct 2024</time><div><strong><span class="en">1st place, Hackathon TalentUO</span><span class="es">1.er puesto, Hackathon TalentUO</span></strong><span class="what">Nexus Lock, Banco Sabadell &amp; Universidad de Oviedo</span></div></li>
-      <li><time>Nov 2024</time><div><strong><span class="en">3rd place and honourable mention, Hackathon Blockchain</span><span class="es">3.er puesto y mención de honor, Hackathon Blockchain</span></strong><span class="what">XRandom, Dextools</span></div></li>
-      <li><time>Dec 2024</time><div><strong><span class="en">2nd place, Santander Entrepreneurship Awards</span><span class="es">2.º puesto, Premios Emprendimiento Santander</span></strong><span class="what">Nexus Lock, Banco Santander</span></div></li>
-      <li class="win"><time>Apr 2025</time><div><strong><span class="en">Winning team, Datathon Merkle 2025</span><span class="es">Equipo ganador, Datathon Merkle 2025</span></strong><span class="what"><span class="en">Best presentation and best technical solution</span><span class="es">Mejor presentación y mejor solución técnica</span></span></div></li>
-      <li class="win"><time>Jun 2026</time><div><strong><span class="en">Winning team, Datathon Merkle 2026</span><span class="es">Equipo ganador, Datathon Merkle 2026</span></strong><span class="what"><span class="en">Best prediction model, with Real Sporting de Gijón data</span><span class="es">Mejor modelo de predicción, con datos del Real Sporting de Gijón</span></span></div></li>
-      <li><time>Jun 2026</time><div><strong><span class="en">Laude in Models and Inference of Statistics</span><span class="es">Laude en Models and Inference of Statistics</span></strong><span class="what">Politecnico di Milano</span></div></li>
-      <li><time>Oct 2026</time><div><strong><span class="en">Semifinalist, DATAthon Justicia</span><span class="es">Semifinalista, DATAthon Justicia</span></strong><span class="what">TuTurno, A Coruña</span></div></li>
-    </ol>
-  </div>
-</section>
-
-<section id="photos" class="reel">
-  <div class="reel-pin">
-    <div class="wrap">
-      <h2><span class="en">Behind the camera</span><span class="es">Detrás de la cámara</span></h2>
-      <p class="lede"><span class="en">Landscape, nature and travel first; races and events when there is one nearby. More on Instagram at <a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a>.</span><span class="es">Paisaje, naturaleza y viajes ante todo; carreras y eventos cuando hay uno cerca. Más en Instagram, en <a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a>.</span></p>
-    </div>
-    <div class="film-scroll"><div class="film" id="film"></div></div>
-  </div>
-</section>
-
-<section class="studio" id="studio">
-  <div class="wrap">
-    <div class="studio-top">
-      <img id="kStudio" src="assets/logo.png" alt="Kodex Studio logo">
-      <div>
-        <h2>Kodex Studio</h2>
-        <p class="tag"><em>Code &amp; camera.</em> <span class="en">Websites, apps and photos for brands that want to stand out.</span><span class="es">Webs, apps y fotos para marcas que quieren destacar.</span></p>
-      </div>
-    </div>
-    <p class="lede"><span class="en">My freelance studio in Gijón. You talk directly to the person who builds your project, from the first sketch to the launch.</span><span class="es">Mi estudio freelance en Gijón. Hablas directamente con quien construye tu proyecto, desde el primer boceto hasta el lanzamiento.</span></p>
-    <div class="svc">
-      <div><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14l-2 2 2 2M16 14l2 2-2 2"/></svg><h3><span class="en">Websites and web apps</span><span class="es">Webs y aplicaciones web</span></h3><p><span class="en">Fast, responsive sites with online payments when you need them.</span><span class="es">Webs rápidas y adaptadas al móvil, con pagos online si los necesitas.</span></p></div>
-      <div><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9M3 9h18v11H3zM9 20v-6h6v6"/></svg><h3><span class="en">Shop digitalisation</span><span class="es">Digitalización de tiendas</span></h3><p><span class="en">Online catalogue, orders or bookings, and digital stock and sales records.</span><span class="es">Catálogo online, pedidos o reservas, y control digital de stock y ventas.</span></p></div>
-      <div><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><h3><span class="en">Custom apps</span><span class="es">Apps a medida</span></h3><p><span class="en">Mobile and web apps built around how your business works (Flutter, FastAPI, Laravel).</span><span class="es">Apps móviles y web hechas a la medida de tu negocio (Flutter, FastAPI, Laravel).</span></p></div>
-      <div><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><h3><span class="en">Databases and AI</span><span class="es">Bases de datos e IA</span></h3><p><span class="en">From scattered spreadsheets to a clean database you can query, with AI where it adds value.</span><span class="es">De Excel sueltos a una base de datos ordenada que puedes consultar, con IA donde aporte.</span></p></div>
-      <div class="cam"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20l6-10 4 6 2-3 6 7z"/><circle cx="17" cy="6" r="2"/></svg><h3><span class="en">Landscape and nature photography</span><span class="es">Fotografía de paisaje y naturaleza</span></h3><p><span class="en">Images of places, trips and outdoor brands, edited and ready for print or web.</span><span class="es">Imágenes de lugares, viajes y marcas de aire libre, editadas y listas para imprimir o para web.</span></p></div>
-      <div class="cam"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13" r="4"/></svg><h3><span class="en">Sports and event photography</span><span class="es">Fotografía de deportes y eventos</span></h3><p><span class="en">Races, sporting events and graduations, delivered as an edited gallery.</span><span class="es">Carreras, eventos deportivos y graduaciones, entregadas como galería editada.</span></p></div>
-    </div>
-    <div class="cta">
-      <a class="btn solid-btn" href="mailto:arguellesiker@gmail.com?subject=Kodex%20Studio"><span class="en">Ask for a quote</span><span class="es">Pedir presupuesto</span></a>
-      <a class="btn" href="https://www.linkedin.com/company/kodexstudio/"><span class="en">Kodex Studio on LinkedIn</span><span class="es">Kodex Studio en LinkedIn</span></a>
-    </div>
-  </div>
-</section>
-
-<section id="cv" class="solid">
-  <div class="wrap">
-    <div class="head cv-head">
-      <div>
-        <h2><span class="en">Curriculum vitae</span><span class="es">Currículum</span></h2>
-        <p class="lede"><span class="en">The one-page version of everything above.</span><span class="es">La versión en una página de todo lo anterior.</span></p>
-      </div>
-    </div>
-    <div class="cv-stage">
-      <article class="sheet" id="sheet">
-        <header>
-          <div>
-            <h3>Iker Argüelles Eduarte</h3>
-            <div class="sub"><span class="en">Data Science &amp; Telecommunications Engineering student. AI, web and app developer.</span><span class="es">Estudiante de Ciencia de Datos e Ingeniería de Telecomunicación. Desarrollador de IA, web y apps.</span></div>
+    <div class="bento">
+      <article class="demo d-web rv">
+        <p class="path">services/web</p>
+        <h3><span class="en">Websites</span><span class="es">Webs</span></h3>
+        <p><span class="en">From a sketch to a finished page that loads fast and looks right on a phone.</span><span class="es">De un boceto a una página terminada que carga rápido y se ve bien en el móvil.</span></p>
+        <div class="stage" aria-hidden="true">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><span class="url"><span class="en">yourbusiness.com</span><span class="es">tunegocio.es</span></span></div>
+            <div class="page" id="dWeb"><div class="b n"></div><div class="b h"><span class="en">Your business</span><span class="es">Tu negocio</span></div><div class="b l"></div><div class="b l l2"></div><div class="b c"><span class="en">Book now</span><span class="es">Reservar</span></div><div class="b g" style="grid-column:1"></div><div class="b g"></div><div class="b g"></div></div>
           </div>
-          <ul class="reach">
-            <li>arguellesiker@gmail.com</li>
-            <li>linkedin.com/in/iker-arguelles</li>
-            <li>github.com/Ikeruuu</li>
-            <li>Gijón, Asturias</li>
+        </div>
+      </article>
+      <article class="demo d-app rv">
+        <p class="path">services/apps</p>
+        <h3><span class="en">Custom apps</span><span class="es">Apps a medida</span></h3>
+        <p><span class="en">Built around how your business works. Try booking a slot.</span><span class="es">Hechas a la medida de cómo trabaja tu negocio. Prueba a reservar una cita.</span></p>
+        <div class="stage">
+          <div class="phone" id="dApp">
+            <div class="screens">
+              <div class="scr"><h4><span class="en">Pick a day</span><span class="es">Elige día</span></h4><div class="chips" data-step="0"></div></div>
+              <div class="scr"><h4><span class="en">Pick a time</span><span class="es">Elige hora</span></h4><div class="chips" data-step="1"></div></div>
+              <div class="scr"><div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><p><span class="en">Booking confirmed</span><span class="es">Reserva confirmada</span></p><small id="appSum"></small></div></div>
+            </div>
+            <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+          </div>
+        </div>
+      </article>
+      <article class="demo d-shop rv">
+        <p class="path">services/shop</p>
+        <h3><span class="en">Shop digitalisation</span><span class="es">Digitalización de tiendas</span></h3>
+        <p><span class="en">Catalogue, orders, payment and stock in one place. Add something to the order.</span><span class="es">Catálogo, pedidos, cobro y stock en un solo sitio. Añade algo al pedido.</span></p>
+        <div class="stage"><div class="shop"><ul id="shopList"></ul><div class="order" id="shopOrder" aria-live="polite"></div></div></div>
+      </article>
+      <article class="demo d-data rv">
+        <p class="path">services/databases+ai</p>
+        <h3><span class="en">Databases with AI</span><span class="es">Bases de datos con IA</span></h3>
+        <p><span class="en">Your data in order, and answers by asking in plain language. Pick a question.</span><span class="es">Tus datos ordenados, y respuestas preguntando con tus palabras. Elige una pregunta.</span></p>
+        <div class="stage"><div class="ask" id="dAsk"><div class="qs" id="askQs"></div><p class="q" id="askQ"></p><p class="sql" id="askSql"></p><div class="bars" id="askBars" aria-live="polite"></div><small><span class="en">Sample data</span><span class="es">Datos de ejemplo</span></small></div></div>
+      </article>
+      <article class="demo d-photo rv">
+        <div class="ph-text">
+          <p class="path">services/photography</p>
+          <h3><span class="en">Photography and editing</span><span class="es">Fotografía y edición</span></h3>
+          <p><span class="en">Photos of your place, your products or your event, edited and ready for the web. This is the same shot before and after editing: move the line to compare.</span><span class="es">Fotos de tu local, tus productos o tu evento, editadas y listas para la web. Esta es la misma foto antes y después de editarla: mueve la línea para comparar.</span></p>
+          <ul class="edits">
+            <li><b><span class="en">Framing</span><span class="es">Encuadre</span></b><span class="en">The original was landscape. We recropped it to vertical, the format phones show best.</span><span class="es">El original era horizontal. La recortamos en vertical, el formato que mejor se ve en el móvil.</span></li>
+            <li><b><span class="en">Light</span><span class="es">Luz</span></b><span class="en">The lit facade gains warmth without burning the detail.</span><span class="es">La fachada iluminada gana calidez sin quemar el detalle.</span></li>
+            <li><b><span class="en">Colour</span><span class="es">Color</span></b><span class="en">The blue cast of the night sky goes; the gold of the dome stays.</span><span class="es">Se va el tono azulado del cielo; se queda el dorado de la cúpula.</span></li>
           </ul>
-        </header>
-        <div class="cv-cols">
-          <div>
-            <h4><span class="en">Experience</span><span class="es">Experiencia</span></h4>
-            <div class="job">
-              <div class="t"><span><span class="en">Freelance developer and photographer</span><span class="es">Desarrollador y fotógrafo freelance</span></span><span><span class="en">2022 – present</span><span class="es">2022 – actualidad</span></span></div>
-              <div class="o">Kodex Studio, Gijón</div>
-              <ul>
-                <li><span class="en">Websites with payment gateways and a Laravel setup that manages a database through AI.</span><span class="es">Webs con pasarelas de pago y un montaje en Laravel que gestiona una base de datos con IA.</span></li>
-                <li><span class="en">Landscape, nature, sports and event photography, shot and edited.</span><span class="es">Fotografía de paisaje, naturaleza, deportes y eventos, con edición.</span></li>
-              </ul>
-            </div>
-            <div class="job">
-              <div class="t"><span><span class="en">Data analysis intern</span><span class="es">Prácticas de análisis de datos</span></span><span><span class="en">Jul 2024, Jul 2025</span><span class="es">jul. 2024, jul. 2025</span></span></div>
-              <div class="o">TotalEnergies, Oviedo</div>
-              <ul>
-                <li><span class="en">Built predictive models of customer churn.</span><span class="es">Modelos predictivos de baja de clientes (churn).</span></li>
-                <li><span class="en">Validated incident and litigation databases with Excel, Power BI and SAS for the annual CNMC report.</span><span class="es">Validación de bases de datos de incidencias y litigios con Excel, Power BI y SAS para el informe anual a la CNMC.</span></li>
-              </ul>
-            </div>
-            <div class="job">
-              <div class="t"><span><span class="en">Low-voltage electronics</span><span class="es">Electrónica de baja tensión</span></span><span><span class="en">Feb 2025 – Sep 2026</span><span class="es">feb. 2025 – sept. 2026</span></span></div>
-              <div class="o">Uniovi eTech Racing (Formula Student)</div>
-              <ul><li><span class="en">Designed PCBs and wiring for the Habrok EVO single-seater in Altium Designer.</span><span class="es">Diseño de PCBs y cableado del monoplaza Habrok EVO en Altium Designer.</span></li></ul>
-            </div>
-            <div class="job">
-              <div class="t"><span><span class="en">Project manager and web designer</span><span class="es">Project manager y diseño web</span></span><span><span class="en">Feb 2025 – present</span><span class="es">feb. 2025 – actualidad</span></span></div>
-              <div class="o">AsturTalent Uniovi, <a href="https://www.asturtalent.org/">asturtalent.org</a></div>
-              <ul><li><span class="en">Co-organised the first Consulting Hackathon at the University of Oviedo and built the association's website.</span><span class="es">Coorganización del primer Hackathon de Consultoría de la Universidad de Oviedo y web de la asociación.</span></li></ul>
-            </div>
-            <div class="job">
-              <div class="t"><span><span class="en">Student representative</span><span class="es">Representante de estudiantes</span></span><span><span class="en">2023 – present</span><span class="es">2023 – actualidad</span></span></div>
-              <div class="o">EPI Gijón</div>
-              <ul><li><span class="en">Student Council, delegation secretary and School Board member.</span><span class="es">Consejo de Estudiantes, secretario de la delegación y miembro de la Junta de Escuela.</span></li></ul>
-            </div>
-
-            <h4><span class="en">Education</span><span class="es">Formación</span></h4>
-            <div class="job">
-              <div class="t"><span><span class="en">Dual degree: Data Science &amp; Engineering and Telecommunications Engineering</span><span class="es">Doble grado: Ciencia e Ingeniería de Datos e Ingeniería de Telecomunicación</span></span><span><span class="en">2023 – present</span><span class="es">2023 – actualidad</span></span></div>
-              <div class="o">EPI Gijón, Universidad de Oviedo. <span class="en">Five honours on record: three at EPI, including Advanced Programming, plus the Politecnico laude, which counts as two.</span><span class="es">Cinco matrículas de honor en el expediente: tres en la EPI, entre ellas Programación Avanzada, y la laude del Politecnico, que computa como dos.</span></div>
-            </div>
-            <div class="job">
-              <div class="t"><span><span class="en">Erasmus year, Computer Science and Telecommunications</span><span class="es">Año de Erasmus, Computer Science y Telecomunicaciones</span></span><span>2025 – 2026</span></div>
-              <div class="o">Politecnico di Milano. 23.76/30, <span class="en">Laude in Models and Inference of Statistics.</span><span class="es">Laude en Models and Inference of Statistics.</span></div>
-            </div>
-            <div class="job">
-              <div class="t"><span><span class="en">Bachillerato, Science and Technology</span><span class="es">Bachillerato científico-tecnológico</span></span><span>2023</span></div>
-              <div class="o">Colegio de la Asunción, Gijón. <span class="en">10/10 average.</span><span class="es">Media de 10.</span></div>
-            </div>
-          </div>
-          <div>
-            <h4><span class="en">Skills</span><span class="es">Aptitudes</span></h4>
-            <ul class="plain">
-              <li><b><span class="en">AI and data</span><span class="es">IA y datos</span></b><br>Python, scikit-learn, PyTorch, Keras, RAG, NLP, <span class="en">time series</span><span class="es">series temporales</span></li>
-              <li><b><span class="en">Web and apps</span><span class="es">Web y apps</span></b><br>FastAPI, Flutter, Laravel, HTML/CSS, Docker</li>
-              <li><b><span class="en">Data and BI</span><span class="es">Datos y BI</span></b><br>Power BI, Excel, SAS, R</li>
-              <li><b><span class="en">Electronics</span><span class="es">Electrónica</span></b><br>Altium Designer, <span class="en">PCB design</span><span class="es">diseño de PCB</span>, LTSpice</li>
-              <li><b><span class="en">Photography</span><span class="es">Fotografía</span></b><br>Adobe Photoshop</li>
-            </ul>
-            <h4><span class="en">Awards</span><span class="es">Premios</span></h4>
-            <ul class="plain">
-              <li><span class="en">Winner, Datathon Merkle 2025 and 2026</span><span class="es">Ganador, Datathon Merkle 2025 y 2026</span></li>
-              <li><span class="en">1st, Hackathon TalentUO 2024</span><span class="es">1.º, Hackathon TalentUO 2024</span></li>
-              <li><span class="en">2nd, Santander Entrepreneurship Awards 2024</span><span class="es">2.º, Premios Emprendimiento Santander 2024</span></li>
-              <li><span class="en">3rd, Hackathon Blockchain 2024</span><span class="es">3.º, Hackathon Blockchain 2024</span></li>
-              <li><span class="en">Semifinalist, DATAthon Justicia 2026</span><span class="es">Semifinalista, DATAthon Justicia 2026</span></li>
-            </ul>
-            <h4><span class="en">Languages</span><span class="es">Idiomas</span></h4>
-            <ul class="plain">
-              <li><span class="en">Spanish, native</span><span class="es">Español, nativo</span></li>
-              <li><span class="en">English, C1 (Cambridge Advanced, 190)</span><span class="es">Inglés, C1 (Cambridge Advanced, 190)</span></li>
-              <li><span class="en">Italian and French, basic</span><span class="es">Italiano y francés, básico</span></li>
-            </ul>
-            <h4><span class="en">Certificates</span><span class="es">Certificados</span></h4>
-            <ul class="plain">
-              <li>AWS Knowledge: Serverless (2024)</li>
-              <li>Cisco Networking Basics (2024)</li>
-            </ul>
-            <h4><span class="en">Volunteering</span><span class="es">Voluntariado</span></h4>
-            <ul class="plain">
-              <li><span class="en">Speaker at the University of Oviedo open days, 2024 and 2025</span><span class="es">Ponente en las jornadas de orientación de la Universidad de Oviedo, 2024 y 2025</span></li>
-              <li><span class="en">Mentor for new students</span><span class="es">Mentor de estudiantes de nuevo ingreso</span></li>
-            </ul>
+          <div class="thumbs"><img src="assets/photos/01-cliffs.jpg" alt="" loading="lazy"><img src="assets/photos/04-aurora-moon.jpg" alt="" loading="lazy"><img src="assets/photos/03-ice.jpg" alt="" loading="lazy"><img src="assets/photos/10-karting.jpg" alt="" loading="lazy"></div>
+          <p class="more"><span class="en">More photos on <a href="iker/#photos" data-switch>Iker's page</a>.</span><span class="es">Más fotos en <a href="iker/#photos" data-switch>la página de Iker</a>.</span></p>
+        </div>
+        <div class="stage">
+          <div class="ba" id="dBa">
+            <img src="assets/photos/ba-after.jpg" alt="" loading="lazy" draggable="false" width="900" height="1200">
+            <img class="before" src="assets/photos/ba-before.jpg" alt="" loading="lazy" draggable="false" width="900" height="1200">
+            <span class="split" aria-hidden="true"></span>
+            <span class="tag l"><span class="en">Before</span><span class="es">Antes</span></span>
+            <span class="tag r"><span class="en">After</span><span class="es">Después</span></span>
+            <input type="range" min="0" max="100" value="50" aria-label="Compare before and after">
           </div>
         </div>
       </article>
     </div>
-    <div class="cv-actions">
-      <button class="btn solid-btn" type="button" id="printBtn"><span class="en">Save as PDF</span><span class="es">Guardar como PDF</span></button>
-      <a class="btn" href="https://www.linkedin.com/in/iker-arguelles/"><span class="en">See it on LinkedIn</span><span class="es">Verlo en LinkedIn</span></a>
-    </div>
-    <p class="cv-note"><span class="en">"Save as PDF" opens your browser's print dialog with only the CV.</span><span class="es">«Guardar como PDF» abre el diálogo de impresión del navegador solo con el CV.</span></p>
   </div>
 </section>
 
-<section id="contact" class="solid" style="padding-top:24px">
-  <div class="wrap contact">
-    <div>
-      <h2><span class="en">Let's talk</span><span class="es">Hablemos</span></h2>
-      <p class="lede"><span class="en">For internships, projects or a quote, write to me.</span><span class="es">Para prácticas, proyectos o un presupuesto, escríbeme.</span></p>
+<section id="tech" class="solid">
+  <div class="wrap">
+    <div class="head">
+      <p class="path">~/kodex-studio/stack</p>
+      <h2><span class="en">Under the hood</span><span class="es">Bajo el capó</span></h2>
+      <p class="lede"><span class="en">What happens inside when someone presses a button on your site. Pick an action and follow the request from one piece to the next.</span><span class="es">Qué pasa por dentro cuando alguien pulsa un botón en tu web. Elige una acción y sigue la petición de una pieza a otra.</span></p>
+    </div>
+    <div class="trace rv" id="trace">
+      <div class="trace-top" id="traceBtns" role="group" aria-label="Action"></div>
+      <div class="trace-body">
+        <div class="map" id="traceMap">
+          <svg class="wires" id="traceWires" aria-hidden="true"></svg>
+          <div class="col"><div class="node" data-n="client"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="13" rx="2"/><path d="M3 8.5h18M9 20.5h6"/></svg><b><span class="en">Browser</span><span class="es">Navegador</span></b><small>HTML · CSS · JS</small></div></div>
+          <div class="col"><div class="node" data-n="api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3.5" width="16" height="7" rx="1.6"/><rect x="4" y="13.5" width="16" height="7" rx="1.6"/><path d="M7.5 7h.01M7.5 17h.01"/></svg><b><span class="en">Server</span><span class="es">Servidor</span></b><small>Python · FastAPI</small></div></div>
+          <div class="col"><div class="node" data-n="db"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7.5" ry="2.8"/><path d="M4.5 6v12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></svg><b><span class="en">Database</span><span class="es">Base de datos</span></b><small>SQL</small></div><div class="node" data-n="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><b><span class="en">AI model</span><span class="es">Modelo de IA</span></b><small>RAG</small></div><div class="node" data-n="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg><b><span class="en">Payments</span><span class="es">Pagos</span></b><small><span class="en">payment gateway</span><span class="es">pasarela de pago</span></small></div><div class="node" data-n="mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg><b><span class="en">Email</span><span class="es">Correo</span></b><small><span class="en">notices</span><span class="es">avisos</span></small></div></div>
+          <i class="pkt" id="tracePkt" aria-hidden="true"></i>
+        </div>
+        <div class="term"><div class="term-bar"><i></i><i></i><i></i><span id="traceTitle"></span></div><ol id="traceLog" aria-live="polite"></ol></div>
+      </div>
+      <p class="trace-note"><span class="en">Simplified example. Each project gets only the pieces it needs.</span><span class="es">Ejemplo simplificado. Cada proyecto lleva solo las piezas que necesita.</span></p>
+    </div>
+    <h3 class="sub"><span class="en">What we build with</span><span class="es">Con qué construimos</span></h3>
+    <div class="layers stagger" id="layers"></div>
+  </div>
+</section>
+
+<section id="process" class="solid">
+  <div class="wrap">
+    <div class="head">
+      <p class="path">~/kodex-studio/process</p>
+      <h2><span class="en">How we work</span><span class="es">Cómo trabajamos</span></h2>
+      <p class="lede"><span class="en">You talk to the person who builds your project, from the first call to well after it is online.</span><span class="es">Hablas con quien construye tu proyecto, desde la primera llamada hasta bastante después de publicarlo.</span></p>
+    </div>
+    <ol class="steps" id="steps"></ol>
+  </div>
+</section>
+
+<section id="plans" class="solid">
+  <div class="wrap">
+    <div class="head">
+      <p class="path">~/kodex-studio/plans</p>
+      <h2><span class="en">Plans and prices</span><span class="es">Planes y precios</span></h2>
+      <p class="lede"><span class="en">Three closed plans for the most common jobs. Half to start, half on delivery.</span><span class="es">Tres planes cerrados para los encargos más habituales. La mitad al empezar y la otra mitad a la entrega.</span></p>
+    </div>
+    <div class="plans stagger" id="planGrid"></div>
+    <div class="under">
+      <div class="care rv" id="care"></div>
+      <div class="custom rv">
+        <p class="path">plans/custom</p>
+        <h3><span class="en">Something more custom</span><span class="es">Algo más a medida</span></h3>
+        <p><span class="en">Apps, databases with AI, integrations or a mix of several plans. We talk, we study it and you get a closed quote.</span><span class="es">Apps, bases de datos con IA, integraciones o una mezcla de varios planes. Hablamos, lo estudiamos y recibes un presupuesto cerrado.</span></p>
+        <a class="btn" data-mail="custom" href="#contact"><span class="en">Ask for a quote</span><span class="es">Pedir presupuesto</span></a>
+      </div>
+    </div>
+    <p class="extras" id="extras"></p>
+    <p class="fine"><span class="en">Prices without VAT. The domain and the hosting are registered in your name and paid separately to the provider.</span><span class="es">Precios sin IVA. El dominio y el alojamiento se contratan a tu nombre y se pagan aparte al proveedor.</span></p>
+  </div>
+</section>
+
+<section id="faq" class="solid">
+  <div class="wrap">
+    <div class="head"><p class="path">~/kodex-studio/faq</p><h2><span class="en">Common questions</span><span class="es">Preguntas habituales</span></h2></div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<section class="solid whosec">
+  <div class="wrap">
+    <div class="who rv">
+      <img src="assets/iker.jpg" alt="Iker Argüelles speaking with a microphone" loading="lazy">
+      <div>
+        <h2><span class="en">Who is behind Kodex Studio</span><span class="es">Quién está detrás de Kodex Studio</span></h2>
+        <p><span class="en">Kodex Studio is run by Iker Argüelles, a Data Science and Telecommunications Engineering student in Gijón. He has won three data and innovation competitions and always carries a camera. His projects, photos and CV are on his own page.</span><span class="es">Kodex Studio lo dirige Iker Argüelles, estudiante de Ciencia de Datos e Ingeniería de Telecomunicación en Gijón. Ha ganado tres competiciones de datos e innovación y siempre lleva una cámara. Sus proyectos, sus fotos y su CV están en su propia página.</span></p>
+        <a class="btn" href="iker/" data-switch><span class="en">Meet Iker</span><span class="es">Conoce a Iker</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band solid" aria-hidden="true"><div class="band-row rev" id="bandB"></div></div>
+<section class="contact" id="contact" data-scene-b>
+  <div class="wrap">
+    <p class="path">~/kodex-studio $ start</p>
+    <h2><span class="en">Shall we talk about yours?</span><span class="es">¿Hablamos del tuyo?</span></h2>
+    <p class="lede"><span class="en">Tell us what you need in two lines. We reply with questions or with a closed proposal.</span><span class="es">Cuéntanos qué necesitas en dos líneas. Te respondemos con preguntas o con una propuesta cerrada.</span></p>
+    <div class="cta">
+      <a class="btn main" data-mail="hello" href="mailto:arguellesiker@gmail.com?subject=Kodex%20Studio"><span class="en">Write to us</span><span class="es">Escríbenos</span></a>
+      <a class="btn" href="https://www.linkedin.com/company/kodexstudio/"><span class="en">Kodex Studio on LinkedIn</span><span class="es">Kodex Studio en LinkedIn</span></a>
     </div>
     <ul>
-      <li><span>Email</span><a href="mailto:arguellesiker@gmail.com">arguellesiker@gmail.com</a></li>
-      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/iker-arguelles/">in/iker-arguelles</a></li>
-      <li><span>GitHub</span><a href="https://github.com/Ikeruuu">github.com/Ikeruuu</a></li>
-      <li><span>Instagram</span><a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a></li>
-      <li><span class="en">Studio</span><span class="es">Estudio</span><a href="https://www.linkedin.com/company/kodexstudio/">Kodex Studio</a></li>
+      <li><a href="mailto:arguellesiker@gmail.com">arguellesiker@gmail.com</a></li>
+      <li><a href="https://www.instagram.com/ikeruufx/">@ikeruufx</a></li>
+      <li>Gijón, Asturias</li>
     </ul>
   </div>
 </section>
 </main>
-<footer class="solid"><div class="wrap">© 2026 Iker Argüelles, Gijón</div></footer>
+<footer><div class="wrap">© 2026 Kodex Studio, Iker Argüelles</div></footer>
 
-<dialog id="lb" aria-label="Photo viewer">
-  <div class="lb-in"><div id="lbMedia"></div><p id="lbCap"></p></div>
-  <button class="x" type="button" id="lbX"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span class="en" style="position:absolute;clip:rect(0 0 0 0)">Close</span><span class="es" style="position:absolute;clip:rect(0 0 0 0)">Cerrar</span></button>
-  <button class="prev" type="button" id="lbPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="en" style="position:absolute;clip:rect(0 0 0 0)">Previous</span><span class="es" style="position:absolute;clip:rect(0 0 0 0)">Anterior</span></button>
-  <button class="next" type="button" id="lbNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span class="en" style="position:absolute;clip:rect(0 0 0 0)">Next</span><span class="es" style="position:absolute;clip:rect(0 0 0 0)">Siguiente</span></button>
-</dialog>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/data.js"></script>
-<script src="js/site.js"></script>
+<script src="js/studio-data.js"></script>
+<script src="js/studio.js"></script>
 <script src="js/scene.js"></script>
+<script src="js/switch.js"></script>
 </body>
 </html>

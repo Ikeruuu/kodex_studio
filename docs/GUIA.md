@@ -1,8 +1,38 @@
 # Guía para editar y publicar la web
 
-Todo lo que cambia a menudo está en `js/data.js`. Los textos fijos y el CV están en
-`index.html`. No hace falta instalar nada: se edita el archivo, se sube a GitHub y la
-web se actualiza sola en uno o dos minutos.
+La web tiene dos páginas:
+
+| Página | Dirección | Archivos |
+|---|---|---|
+| Kodex Studio (portada) | https://ikeruuu.github.io/kodex_studio/ | `index.html`, `css/studio.css`, `js/studio-data.js`, `js/studio.js` |
+| Sobre Iker | https://ikeruuu.github.io/kodex_studio/iker/ | `iker/index.html`, `css/site.css`, `js/data.js`, `js/site.js` |
+
+Lo que cambia a menudo está en los dos archivos de datos: `js/studio-data.js` (planes,
+precios y textos del estudio) y `js/data.js` (proyectos y fotos de Iker). No hace falta
+instalar nada: se edita el archivo, se sube a GitHub y la web se actualiza sola en uno
+o dos minutos.
+
+## 0. Cambiar planes, precios y plazos de Kodex Studio
+
+Todo está en `js/studio-data.js`:
+
+- `PLANS`: los tres planes. `price` es el precio, `time` el plazo de entrega, `for` la
+  frase de para quién es e `items` la lista de lo que incluye. `featured:1` marca el
+  plan destacado.
+- `CARE`: la cuota mensual de mantenimiento y lo que cubre.
+- `EXTRAS`: los extras con precio fijo.
+- `STEPS`: los pasos de «Cómo trabajamos».
+- `FAQ`: las preguntas habituales.
+- `TRACE` y `LAYERS`: los ejemplos de «Bajo el capó» y las tecnologías por capa.
+
+Cada texto lleva su versión `en` y su versión `es`; cambia siempre las dos. Los precios
+son números sin símbolo: la web pone el € y el formato según el idioma.
+
+Para cambiar las dos fotos del antes y después, sustituye
+`assets/photos/ba-before.jpg` y `assets/photos/ba-after.jpg` por otras dos del mismo
+tamaño y con el mismo encuadre (900 × 1200 px).
+
+Los apartados siguientes (1 y 2) son de la página «Sobre Iker».
 
 ## 1. Añadir un proyecto
 
@@ -55,9 +85,10 @@ Para quitar un proyecto, borra su bloque entero.
 - Si cambias una foto por otra, usa un nombre de archivo nuevo: así nadie ve la antigua
   guardada en su navegador.
 
-## 3. Cambiar textos, el CV o los servicios
+## 3. Cambiar textos fijos o el CV
 
-Están en `index.html`. Cada texto aparece dos veces seguidas:
+Los textos fijos de Kodex Studio están en `index.html` y los de la página de Iker, con
+el CV, en `iker/index.html`. Cada texto aparece dos veces seguidas:
 
 ```html
 <span class="en">Text in English</span><span class="es">Texto en español</span>
@@ -68,9 +99,10 @@ Cambia siempre las dos. El CV es el bloque `<section id="cv">`: cada puesto es u
 
 ## 4. Colores y tipografías
 
-Al principio de `css/site.css` están las variables: `--paper` (fondo claro), `--ink`
-(texto), `--code` (azul), `--film` (ámbar), `--night` (fondo oscuro). Cambiar una
-variable cambia toda la web. Los colores de la escena 3D están al principio de
+Cada página tiene sus variables al principio de su hoja de estilos. En `css/site.css`
+(página de Iker): `--paper` (fondo claro), `--ink` (texto), `--code` (azul), `--film`
+(ámbar), `--night` (fondo oscuro). En `css/studio.css` (Kodex Studio): `--bg` (fondo),
+`--text`, `--amber` y `--blue`. Cambiar una variable cambia toda la página. Los colores de la escena 3D están al principio de
 `js/scene.js`, en el objeto `C`.
 
 ## 5. Probar antes de publicar
@@ -79,7 +111,9 @@ variable cambia toda la web. Los colores de la escena 3D están al principio de
 python -m http.server 8000
 ```
 
-y abre `http://localhost:8000`. Para ver la versión de móvil, en Chrome: F12 y el icono
+y abre `http://localhost:8000` (Kodex Studio) o `http://localhost:8000/iker/` (Sobre
+Iker). Ábrela siempre así y no con doble clic en el archivo: el paso de una página a
+otra necesita el servidor. Para ver la versión de móvil, en Chrome: F12 y el icono
 del teléfono.
 
 ## 6. Publicar
@@ -90,8 +124,8 @@ git commit -m "Describe el cambio"
 git push
 ```
 
-GitHub Pages publica lo que haya en la rama `main`. La dirección es
-https://ikeruuu.github.io/kodex_studio/
+GitHub Pages publica lo que haya en la rama `main`. Las direcciones son
+https://ikeruuu.github.io/kodex_studio/ y https://ikeruuu.github.io/kodex_studio/iker/
 
 Si alguna vez hay que activarlo de nuevo: en GitHub, **Settings → Pages → Source:
 Deploy from a branch → `main` y `/ (root)` → Save**.
@@ -101,12 +135,14 @@ Deploy from a branch → `main` y `/ (root)` → Save**.
 1. Compra el dominio (por ejemplo `kodexstudio.dev`).
 2. En GitHub: **Settings → Pages → Custom domain**, escribe el dominio y guarda.
 3. En tu proveedor de dominio, crea el registro DNS que indique GitHub.
-4. En `index.html`, cambia la dirección en `canonical`, `og:url` y `og:image`.
+4. En `index.html` y en `iker/index.html`, cambia la dirección en `canonical`, `og:url`
+   y `og:image`.
 
 ## 8. Compartir en LinkedIn
 
 Al pegar el enlace, LinkedIn muestra la imagen `assets/og.png`, el título y la
-descripción que hay en la cabecera de `index.html`. Si cambias esa imagen y LinkedIn
+descripción que hay en la cabecera de la página enlazada (`index.html` o
+`iker/index.html`). Si cambias esa imagen y LinkedIn
 sigue enseñando la antigua, pasa el enlace por el
 [Post Inspector](https://www.linkedin.com/post-inspector/) para que la vuelva a leer.
 
@@ -116,5 +152,6 @@ sigue enseñando la antigua, pasa el enlace por el
 |---|---|
 | No aparece el fondo 3D | El navegador no tiene WebGL o no cargó three.js. La web sigue funcionando con fondo liso. |
 | Una foto no sale | Que el nombre en `PHOTOS` sea idéntico al del archivo, mayúsculas incluidas. |
-| La web se queda en blanco tras editar `data.js` | Falta una coma o una llave. Abre la consola (F12) y mira la línea del error. |
+| La web se queda en blanco tras editar `data.js` o `studio-data.js` | Falta una coma o una llave. Abre la consola (F12) y mira la línea del error. |
+| La pantalla de carga tarda en irse | Espera a que termine de cargar la página; si algo falla, se retira sola a los pocos segundos. |
 | El cambio no aparece | Espera dos minutos y recarga con Ctrl+F5. |

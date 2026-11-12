@@ -1,20 +1,21 @@
-/* Page behaviour: language switch, project grid, film strip and viewer, menu, scroll-linked motion.
+/* Page behaviour: loading screen, language switch, project grid, film strip and viewer, menu, reveals and scroll-linked motion.
    Reads its content from js/data.js. */
 const AWARD='<svg viewBox="0 0 24 24" fill="none" stroke="#16181D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>';
 
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const $=s=>document.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let lang='en', filter='all', firstRender=true;
+if(!REDUCE)document.documentElement.classList.add('fx');
 try{lang=localStorage.getItem('lang')||((navigator.language||'').startsWith('es')?'es':'en')}catch(e){lang=(navigator.language||'').startsWith('es')?'es':'en'}
 
 /* ---------- render ---------- */
 function renderFilters(){$('#filters').innerHTML=FILTERS.map(f=>`<button type="button" data-f="${f.k}" aria-pressed="${f.k===filter}">${f[lang]}</button>`).join('')}
-function renderGrid(){
+function renderGrid(pop){
   const list=PROJECTS.filter(p=>filter==='all'||p.cat.includes(filter));
-  $('#grid').innerHTML=list.map(p=>`<article class="proj${p.big&&filter==='all'?' big':''}${firstRender&&!REDUCE?' pre':''}">
+  $('#grid').innerHTML=list.map((p,i)=>`<article class="proj${p.big&&filter==='all'?' big':''}${firstRender&&!REDUCE?' pre':''}${pop&&!REDUCE?' pop':''}" style="--i:${i}">
     ${p.award?`<div class="award" title="${lang==='es'?'Premiado':'Award'}">${AWARD}</div>`:''}
     <div class="ev">${p.ev[lang]}</div>
     <h3>${esc(lang==='es'&&p.titleEs?p.titleEs:p.title)}</h3>
@@ -38,7 +39,7 @@ function renderFilm(){
     const n=`<span class="n">${i+1}A</span>`, cat=`<span class="cat">${p.cat[lang]}</span>`;
     if(!p.src)return `<div class="frame empty" style="aspect-ratio:3/2">${n}<span class="ph">${lang==='es'?'Aquí irá una foto de':'A photo goes here:'} ${p.cat[lang].toLowerCase()}</span>${cat}</div>`;
     const media=p.video?`<video muted loop playsinline preload="none" poster="${p.poster}" src="${p.src}"></video>${PLAY}`:`<img src="${p.src}" alt="" loading="lazy" draggable="false">`;
-    return `<button class="frame${p.h>p.w?' tall':''}" type="button" data-i="${i}" style="aspect-ratio:${p.w}/${p.h}" aria-label="${(lang==='es'?'Ampliar: ':'Enlarge: ')+esc(p.alt[lang])}">${n}${media}${p.place?`<span class="place">${p.place[lang]}</span>`:''}${cat}</button>`;
+    return `<button class="frame${p.h>p.w?' tall':''}" type="button" data-i="${i}" style="aspect-ratio:${p.w}/${p.h};--i:${Math.min(i,8)}" aria-label="${(lang==='es'?'Ampliar: ':'Enlarge: ')+esc(p.alt[lang])}">${n}${media}${p.place?`<span class="place">${p.place[lang]}</span>`:''}${cat}</button>`;
   }).join('');
   if(vio)vio.disconnect();
   if('IntersectionObserver' in window&&!REDUCE){
@@ -75,7 +76,7 @@ function setLang(l){
   renderFilters(); renderGrid(); renderRows(); renderFilm();
 }
 $('.lang').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setLang(b.dataset.lang)});
-$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filter=b.dataset.f;renderFilters();renderGrid()});
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filter=b.dataset.f;renderFilters();renderGrid(true)});
 $('#grid').addEventListener('click',e=>{const b=e.target.closest('.more');if(!b)return;const card=b.closest('.proj');const open=card.classList.toggle('open');b.setAttribute('aria-expanded',open);b.textContent=open?(lang==='es'?'Menos detalles':'Fewer details'):(lang==='es'?'Más detalles':'More details')});
 
 /* 3D tilt on project cards */
@@ -106,12 +107,35 @@ document.addEventListener('click',e=>{if(!e.target.closest('#nav'))menu(false)})
 $('#printBtn').addEventListener('click',()=>{try{window.print()}catch(e){}});
 
 /* hero letters */
-(function(){const h=$('#name');const words=h.textContent.split(' ');let i=0;h.innerHTML=words.map(w=>`<span class="w" aria-hidden="true">${[...w].map(ch=>`<span class="c" style="transition-delay:${(i++)*45}ms">${ch}</span>`).join('')}</span>`).join(' ');setTimeout(()=>$('.hero').classList.add('go'),80)})();
+(function(){const h=$('#name');const words=h.textContent.split(' ');let i=0;h.innerHTML=words.map(w=>`<span class="w" aria-hidden="true">${[...w].map(ch=>`<span class="c" style="transition-delay:${(i++)*45}ms">${ch}</span>`).join('')}</span>`).join(' ')})();
+
+/* loading screen: stays until the page is ready, then the name comes in */
+(function(){
+  const d=document.documentElement, go=()=>$('.hero').classList.add('go');
+  if(!d.classList.contains('loading')){setTimeout(go,80);return}
+  const MIN=d.classList.contains('seen')?700:1500; let done=false;
+  const finish=()=>{if(done)return;done=true;
+    setTimeout(()=>{d.classList.add('loaded');setTimeout(go,420);setTimeout(()=>d.classList.remove('loading','loaded'),1100)},Math.max(0,MIN-performance.now()))};
+  const ready=()=>{const f=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();Promise.race([f,new Promise(r=>setTimeout(r,1200))]).then(finish,finish)};
+  if(document.readyState==='complete')ready(); else addEventListener('load',ready);
+  setTimeout(finish,5000);
+})();
+
+/* buttons that lean towards the pointer */
+if(FINE&&!REDUCE){
+  document.addEventListener('pointermove',e=>{
+    const b=e.target.closest('.btn.solid-btn');
+    $$('.btn.solid-btn').forEach(x=>{if(x!==b)x.style.transform=''});
+    if(b){const r=b.getBoundingClientRect();b.style.transform=`translate(${((e.clientX-r.left)/r.width-.5)*10}px,${((e.clientY-r.top)/r.height-.5)*8}px)`}
+  },{passive:true});
+}
 
 /* ---------- scroll-linked motion ---------- */
 let reelMax=0;
 const reel=$('#photos'), film=$('#film'), sheet=$('#sheet'), tl=$('#timeline'), bar=$('#bar'), rowA=$('#rowA'), rowB=$('#rowB');
-const DARK=[reel,$('#studio')];
+const DARK=[reel,$('#studio')], heroEl=$('.hero'), lit=$$('main>section.solid');
+/* each photo slides a little inside its frame, depending on where the frame is on screen */
+function drift(){if(REDUCE)return;const w=innerWidth;for(const f of film.children){const r=f.getBoundingClientRect();if(r.right<-200||r.left>w+200)continue;f.style.setProperty('--px',clamp(((r.left+r.width/2)-w/2)/w,-1,1).toFixed(3))}}
 function pinned(){return innerWidth>=900&&!REDUCE}
 function measure(){
   if(pinned()){reelMax=Math.max(0,film.scrollWidth-innerWidth+56);reel.style.height=(innerHeight-64+reelMax)+'px'}
@@ -125,6 +149,11 @@ function onScroll(){
   [...tl.querySelectorAll('li')].forEach(li=>{li.classList.toggle('on',li.getBoundingClientRect().top<vh*.72+8)});
   if(pinned()&&reelMax>0){const rr=reel.getBoundingClientRect();const p=clamp((64-rr.top)/Math.max(1,reelMax));film.style.setProperty('--x',(-p*reelMax)+'px');film.parentNode.style.setProperty('--ry',((.5-p)*8)+'deg')}
   if(!REDUCE){const sr=sheet.parentNode.getBoundingClientRect();sheet.style.setProperty('--tilt',innerWidth<760?0:(26*(1-clamp((vh-sr.top)/(vh*.75)))).toFixed(2))}
+  if(!REDUCE){
+    heroEl.style.setProperty('--hp',clamp(y/Math.max(1,heroEl.offsetHeight)));
+    for(const s of lit){const r=s.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;s.style.setProperty('--sy',(((r.top+r.height/2)-vh/2)/vh).toFixed(3))}
+    const rr=reel.getBoundingClientRect(); if(rr.bottom>0&&rr.top<vh)drift();
+  }
   /* the bar turns dark while a dark section sits under it */
   let dark=false; for(const el of DARK){const r=el.getBoundingClientRect(); if(r.top<=40&&r.bottom>40){dark=true;break}}
   document.documentElement.classList.toggle('nav-dark',dark);
@@ -133,5 +162,30 @@ let ticking=false;
 function tick(){if(!ticking)return;ticking=false;onScroll()}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(tick);setTimeout(tick,120)}},{passive:true});
 addEventListener('resize',()=>{measure();onScroll()});
+
+film.parentNode.addEventListener('scroll',drift,{passive:true});
+
+/* ---------- reveals: mark the blocks, then let each one in when it enters the screen ---------- */
+(function(){
+  if(REDUCE)return;
+  const mark=(sel,cls,i)=>$$(sel).forEach((el,k)=>{el.classList.add(...cls.split(' '));el.style.setProperty('--i',i==null?k:i)});
+  $$('main h2').forEach(h=>{if(!h.closest('.sheet'))h.classList.add('rvh')});
+  mark('.about>div:first-child','rv side',0);
+  mark('.about>div:last-child>p','rv');
+  mark('main .head .lede,.reel .lede,#contact .lede','rv',1);
+  mark('.filters','rv',2);
+  mark('.studio-top img','rv',0); mark('.studio .tag','rv',1); mark('.studio .lede','rv',2); mark('.studio .cta','rv',3);
+  mark('.cv-actions,.cv-note','rv',0);
+  $$('.facts,.contact ul').forEach(el=>el.classList.add('stagger'));
+  if(!('IntersectionObserver' in window)){$$('.rv,.rvh,.stagger,#film').forEach(el=>el.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;
+    if(t.id==='flip')t.classList.add('hint'); else if(t===film.parentNode)film.classList.add('in'); else t.classList.add('in');
+    if(t.dataset.h)$$('h2.rvh',t).forEach(h=>h.classList.add('in'));
+    io.unobserve(t)}),{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+  /* the strip is far wider than the screen, so its window is watched instead of the strip itself;
+     a clipped heading has no visible area to watch, so its parent is watched for it */
+  $$('.rv,.stagger,#flip').forEach(el=>io.observe(el)); io.observe(film.parentNode);
+  $$('h2.rvh').forEach(h=>{h.parentNode.dataset.h=1;io.observe(h.parentNode)});
+})();
 
 setLang(lang); measure(); onScroll();

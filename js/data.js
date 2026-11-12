@@ -62,7 +62,7 @@ const PROJECTS=[
 ];
 const FILTERS=[{k:'all',en:'All',es:'Todo'},{k:'ai',en:'AI',es:'IA'},{k:'data',en:'Data',es:'Datos'},{k:'web',en:'Web & apps',es:'Web y apps'},{k:'hw',en:'Hardware',es:'Hardware'},{k:'biz',en:'Product & business',es:'Producto y negocio'}];
 /* Photos and clips for the film strip. Entries without src render as labelled empty frames. */
-const P='assets/photos/';
+const P=(window.ASSET_ROOT||'')+'assets/photos/';
 const PHOTOS=[
  {src:P+'01-cliffs.jpg',w:4,h:3,cat:{en:'Landscape',es:'Paisaje'},place:{en:'Iceland',es:'Islandia'},alt:{en:'Golden fields under snow-streaked cliffs in low light',es:'Campos dorados bajo acantilados con restos de nieve y luz baja'}},
  {src:P+'02-black-beach.jpg',w:3,h:4,cat:{en:'Landscape',es:'Paisaje'},place:{en:'Iceland',es:'Islandia'},alt:{en:'A lone figure on a black plain with patches of snow, sun behind the clouds',es:'Una figura sola en una llanura negra con manchas de nieve y el sol tras las nubes'}},
