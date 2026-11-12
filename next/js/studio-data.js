@@ -9,28 +9,28 @@ const PLANS=[
  {id:'negocio',name:{en:'Business',es:'Negocio'},price:990,featured:1,
   for:{en:'A full website that explains what you do and brings in enquiries.',es:'Una web completa que explica lo que haces y te trae consultas.'},
   time:{en:'Ready in 2 to 3 weeks',es:'Lista en 2 o 3 semanas'},
-  items:{en:['Website of up to 6 pages','Texts reviewed and organised with you','Gallery or catalogue (without online purchase)','Booking or quote requests by form','Two languages','Visit statistics'],
-         es:['Web de hasta 6 páginas','Textos revisados y ordenados contigo','Galería o catálogo (sin compra online)','Reservas o peticiones de presupuesto por formulario','Dos idiomas','Estadísticas de visitas']}},
+  items:{en:['A full multi-page website','Texts reviewed and organised with you','Gallery or catalogue (without online purchase)','Booking or quote requests by form','Several languages','Visit statistics'],
+         es:['Web completa de varias páginas','Textos revisados y ordenados contigo','Galería o catálogo (sin compra online)','Reservas o peticiones de presupuesto por formulario','Varios idiomas','Estadísticas de visitas']}},
  {id:'tienda',name:{en:'Shop',es:'Tienda'},price:1790,
   for:{en:'Sell or take orders online, with payments and stock under control.',es:'Vende o recibe pedidos online, con pagos y stock controlados.'},
   time:{en:'Ready in 4 to 5 weeks',es:'Lista en 4 o 5 semanas'},
-  items:{en:['Online shop or catalogue with payment, up to 30 products','Orders and stock in one panel','Payment gateway set up and tested','Email notices for you and your customers','A session to teach you how to manage it'],
-         es:['Tienda o catálogo con pago online, hasta 30 productos','Pedidos y stock en un solo panel','Pasarela de pago configurada y probada','Avisos por correo para ti y tus clientes','Una sesión para enseñarte a gestionarla']}}
+  items:{en:['Online shop or catalogue with payment','A highly customised design, at the level of this website','Your own POS, set up for Verifactu','Orders and stock in one panel','Payment gateway set up and tested','Email notices for you and your customers','A session to teach you how to manage it'],
+         es:['Tienda o catálogo con pago online','Diseño muy personalizado, al nivel de esta misma web','TPV propio para tu negocio, configurado para Verifactu','Pedidos y stock en un solo panel','Pasarela de pago configurada y probada','Avisos por correo para ti y tus clientes','Una sesión para enseñarte a gestionarla']}}
 ];
 const CARE={price:39,
- items:{en:['Backups and updates','We check that the site stays online','Up to 2 small changes a month','Reply within 48 working hours','No minimum stay'],
-        es:['Copias de seguridad y actualizaciones','Vigilamos que la web siga en línea','Hasta 2 cambios pequeños al mes','Respuesta en 48 horas laborables','Sin permanencia']}};
+ items:{en:['Backups and updates','We check that the site stays online','Reply within 24 hours','No minimum stay'],
+        es:['Copias de seguridad y actualizaciones','Vigilamos que la web siga en línea','Respuesta en 24 horas','Sin permanencia']}};
 const EXTRAS=[
  {n:{en:'Photo session for your website',es:'Sesión de fotos para tu web'},price:150},
  {n:{en:'Extra language',es:'Idioma adicional'},price:120},
  {n:{en:'Extra page',es:'Página adicional'},price:80}
 ];
 const STEPS=[
- {t:{en:'We talk',es:'Hablamos'},d:{en:'A call or a coffee, free of charge. You tell me what you need and what you already have.',es:'Una llamada o un café, sin coste. Me cuentas qué necesitas y qué tienes ya.'}},
+ {t:{en:'We talk',es:'Hablamos'},d:{en:'A call or a coffee, free of charge. You tell us what you need and what you already have.',es:'Una llamada o un café, sin coste. Nos cuentas qué necesitas y qué tienes ya.'}},
  {t:{en:'Closed proposal',es:'Propuesta cerrada'},d:{en:'You get the fixed price, what it includes and the delivery date in writing.',es:'Recibes por escrito el precio fijo, lo que incluye y la fecha de entrega.'}},
  {t:{en:'First half and we start',es:'Primera mitad y empezamos'},d:{en:'You pay 50% to book the dates. You follow the progress on a private link, with two rounds of changes included.',es:'Pagas el 50 % para reservar fechas. Ves el avance en un enlace privado, con dos rondas de cambios incluidas.'}},
- {t:{en:'Delivery and second half',es:'Entrega y segunda mitad'},d:{en:'We put it online, I show you how to use it and you pay the remaining 50%.',es:'Lo publicamos, te enseño a usarlo y pagas el 50 % restante.'}},
- {t:{en:'I stay with you',es:'Sigo contigo'},d:{en:'30 days of support included after delivery. After that, monthly maintenance if you want it.',es:'30 días de soporte incluidos tras la entrega. Después, mantenimiento mensual si lo quieres.'}}
+ {t:{en:'Delivery and second half',es:'Entrega y segunda mitad'},d:{en:'We put it online, we show you how to use it and you pay the remaining 50%.',es:'Lo publicamos, te enseñamos a usarlo y pagas el 50 % restante.'}},
+ {t:{en:'We stay with you',es:'Seguimos contigo'},d:{en:'30 days of support included after delivery. After that, monthly maintenance if you want it.',es:'30 días de soporte incluidos tras la entrega. Después, mantenimiento mensual si lo quieres.'}}
 ];
 const FAQ=[
  {q:{en:'Why a fixed price instead of an hourly rate?',es:'¿Por qué precio fijo y no por horas?'},a:{en:'So you know what you will pay before we start. If the job grows along the way, we talk about it and that part gets its own closed price.',es:'Para que sepas lo que vas a pagar antes de empezar. Si el encargo crece por el camino, lo hablamos y esa parte lleva su propio precio cerrado.'}},
