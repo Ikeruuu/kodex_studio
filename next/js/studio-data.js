@@ -39,14 +39,42 @@ const FAQ=[
  {q:{en:'What if I need changes later?',es:'¿Y si necesito cambios después?'},a:{en:'The first 30 days are covered. After that you can take the monthly maintenance or ask for a one-off change with a closed price.',es:'Los primeros 30 días están cubiertos. Después puedes contratar el mantenimiento mensual o pedir un cambio puntual con precio cerrado.'}},
  {q:{en:'My project does not fit any plan',es:'Mi proyecto no encaja en ningún plan'},a:{en:'Apps, databases with AI and integrations are quoted one by one. The way of working is the same: closed price, two halves and support afterwards.',es:'Las apps, las bases de datos con IA y las integraciones se presupuestan una a una. La forma de trabajar es la misma: precio cerrado, dos mitades y soporte después.'}}
 ];
-const WORK=[
- {kind:{en:'Mobile and web app',es:'App móvil y web'},title:'TuTurno',d:{en:'An app that explains court proceedings to teenagers with a game, short lessons and a voice agent. Semifinalist at DATAthon Justicia 2026.',es:'Una app que explica el proceso judicial a adolescentes con un juego, lecciones cortas y un agente de voz. Semifinalista en el DATAthon Justicia 2026.'},link:{label:{en:'Try the demo',es:'Probar la demo'},u:'https://aliassdev.github.io/Hackaton-DataForum-2026/'}},
- {kind:{en:'Web app with AI',es:'Aplicación web con IA'},title:'Camín',d:{en:'Citizens report road incidents and a model sorts each one by severity and by the body that must act, on a live map.',es:'La ciudadanía reporta incidencias en carretera y un modelo ordena cada una por gravedad y por organismo responsable, sobre un mapa en vivo.'}},
- {kind:{en:'Database with AI',es:'Base de datos con IA'},title:{en:'A database you can ask questions',es:'Una base de datos a la que se le pregunta'},d:{en:'A Laravel setup that lets a business manage and query its database through AI instead of scattered spreadsheets.',es:'Un montaje en Laravel para que un negocio gestione y consulte su base de datos con IA en lugar de hojas de cálculo sueltas.'}},
- {kind:{en:'Websites with payments',es:'Webs con pagos'},title:{en:'Sites that take payments',es:'Webs que cobran'},d:{en:'Dynamic websites connected to payment gateways, so the order and the payment happen in the same place.',es:'Webs dinámicas conectadas a pasarelas de pago, para que el pedido y el cobro ocurran en el mismo sitio.'}},
- {kind:{en:'Association website',es:'Web de asociación'},title:'AsturTalent',d:{en:'Website of the first entrepreneurship association of the University of Oviedo.',es:'Web de la primera asociación de emprendimiento de la Universidad de Oviedo.'},link:{label:{en:'Visit the site',es:'Ver la web'},u:'https://www.asturtalent.org/'}}
+/* The request tracer in "Under the hood". Each step: from, to, the technical line and a plain explanation. */
+const TRACE=[
+ {name:{en:'Book a slot',es:'Reservar una cita'},file:'POST /api/bookings',steps:[
+  ['client','api','POST /api/bookings',{en:'The form sends the day and the time.',es:'El formulario envía el día y la hora.'}],
+  ['api','api','validate(body)',{en:'The server checks the data before trusting it.',es:'El servidor comprueba los datos antes de fiarse de ellos.'}],
+  ['api','db','SELECT … FROM slots WHERE free',{en:'Is that slot still free?',es:'¿Sigue libre ese hueco?'}],
+  ['db','api','1 row',{en:'It is: the booking can go ahead.',es:'Lo está: la reserva puede seguir.'}],
+  ['api','db','INSERT INTO bookings',{en:'The booking is saved and the slot is taken.',es:'Se guarda la reserva y el hueco queda ocupado.'}],
+  ['api','mail','send(confirmation)',{en:'Confirmation for the customer, notice for the business.',es:'Confirmación para el cliente y aviso para el negocio.'}],
+  ['api','client','201 Created',{en:'The screen shows "Booking confirmed".',es:'La pantalla muestra «Reserva confirmada».'}]]},
+ {name:{en:'Pay an order',es:'Pagar un pedido'},file:'POST /api/orders',steps:[
+  ['client','api','POST /api/orders',{en:'The cart arrives at the server.',es:'El carrito llega al servidor.'}],
+  ['api','db','SELECT stock FROM products',{en:'Prices and stock are read from the database, never from the browser.',es:'Precios y stock se leen de la base de datos, nunca del navegador.'}],
+  ['db','api','3 rows',{en:'Everything is in stock.',es:'Hay existencias de todo.'}],
+  ['api','pay','create_payment(total)',{en:'The gateway takes the card. Card details never touch our server.',es:'La pasarela cobra la tarjeta. Los datos de la tarjeta nunca pasan por nuestro servidor.'}],
+  ['pay','api','webhook: payment ok',{en:'The gateway confirms with a signed message.',es:'La pasarela confirma con un mensaje firmado.'}],
+  ['api','db','UPDATE stock, orders',{en:'Stock goes down and the order is marked as paid.',es:'Baja el stock y el pedido queda como pagado.'}],
+  ['api','mail','send(receipt)',{en:'Receipt for the customer, new order for the shop.',es:'Recibo para el cliente y pedido nuevo para la tienda.'}],
+  ['api','client','200 OK',{en:'The screen shows "Payment received".',es:'La pantalla muestra «Pago recibido».'}]]},
+ {name:{en:'Ask the data',es:'Preguntar a los datos'},file:'POST /api/ask',steps:[
+  ['client','api','POST /api/ask',{en:'"What sold best in October?"',es:'«¿Qué se vendió más en octubre?»'}],
+  ['api','ai','question → SQL',{en:'The model turns the question into a query.',es:'El modelo convierte la pregunta en una consulta.'}],
+  ['ai','api','SELECT product, SUM(units) …',{en:'The server checks that the query only reads.',es:'El servidor revisa que la consulta solo lea.'}],
+  ['api','db','run(query, read_only)',{en:'The query runs with a user that cannot change anything.',es:'La consulta se ejecuta con un usuario que no puede modificar nada.'}],
+  ['db','api','3 rows',{en:'The real figures come back.',es:'Vuelven las cifras reales.'}],
+  ['api','ai','rows → answer',{en:'The model writes the answer from those figures, not from memory.',es:'El modelo redacta la respuesta con esas cifras, no de memoria.'}],
+  ['api','client','200 OK',{en:'Answer and chart on screen.',es:'Respuesta y gráfico en pantalla.'}]]}
 ];
-const SHOTS=['01-cliffs.jpg','04-aurora-moon.jpg','10-karting.jpg','09-madrid-night.jpg','03-ice.jpg'];
+const NODES={client:{en:'browser',es:'navegador'},api:{en:'server',es:'servidor'},db:{en:'database',es:'base de datos'},ai:{en:'AI',es:'IA'},pay:{en:'payments',es:'pagos'},mail:{en:'email',es:'correo'}};
+const LAYERS=[
+ {n:{en:'Interface',es:'Interfaz'},d:{en:'What people see and touch, on a phone or a computer.',es:'Lo que se ve y se toca, en el móvil o en el ordenador.'},t:['HTML','CSS','JavaScript','three.js','Flutter']},
+ {n:{en:'Server',es:'Servidor'},d:{en:'The rules of your business: who can do what, and when.',es:'Las reglas de tu negocio: quién puede hacer qué y cuándo.'},t:['Python','FastAPI','Laravel']},
+ {n:{en:'Data',es:'Datos'},d:{en:'Orders, customers and stock in one place, with no stray spreadsheets.',es:'Pedidos, clientes y stock en un solo sitio, sin hojas de cálculo sueltas.'},t:['SQL',{en:'Relational databases',es:'Bases de datos relacionales'}]},
+ {n:{en:'AI',es:'IA'},d:{en:'Models that answer with your own data or sort what comes in.',es:'Modelos que responden con tus propios datos o clasifican lo que entra.'},t:['PyTorch','scikit-learn','RAG','NLP']},
+ {n:{en:'Going live',es:'Puesta en marcha'},d:{en:'Published the same way every time, so an update breaks nothing.',es:'Publicado siempre de la misma forma, para que una actualización no rompa nada.'},t:['Docker','Git']}
+];
 const TYPED={en:['build a website','ship an app','tidy a database','shoot the photos'],es:['hacer una web','lanzar una app','ordenar una base de datos','hacer las fotos']};
 const SHOP={en:[['Coffee beans 1 kg',18],['Ceramic mug',12],['Heather honey',9]],es:[['Café en grano 1 kg',18],['Taza de cerámica',12],['Miel de brezo',9]]};
 const ASK=[

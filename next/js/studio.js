@@ -1,4 +1,4 @@
-/* Behaviour of the Kodex Studio page: language, menu, the five demos, plans and scroll effects.
+/* Behaviour of the Kodex Studio page: loading screen, language, menu, the five demos, the request tracer, plans and scroll effects.
    Reads its content from js/studio-data.js. */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -13,9 +13,8 @@ const money=n=>lang==='es'?n.toLocaleString('es-ES')+' €':'€'+n.toLocaleStri
 const mailto=s=>`mailto:${MAIL}?subject=${encodeURIComponent('Kodex Studio · '+s)}`;
 
 /* ---------- static blocks rendered from data ---------- */
-function renderWork(){
-  $('#workGrid').innerHTML=WORK.map((w,i)=>`<article class="wk spot tilt" style="--i:${i}"><span class="kind">${T(w.kind)}</span><h3>${esc(T(w.title))}</h3><p>${esc(T(w.d))}</p>${w.link?`<a href="${w.link.u}">${T(w.link.label)}</a>`:''}</article>`).join('');
-  $('#shots').innerHTML=SHOTS.map((f,i)=>`<img src="assets/photos/${f}" alt="" loading="lazy" style="--i:${i}">`).join('');
+function renderLayers(){
+  $('#layers').innerHTML=LAYERS.map((l,i)=>`<div class="layer" style="--i:${i}"><b>${T(l.n)}</b><p>${T(l.d)}</p><ul>${l.t.map(t=>`<li>${T(t)}</li>`).join('')}</ul></div>`).join('');
 }
 function renderSteps(){$('#steps').innerHTML='<span class="fill" aria-hidden="true"></span>'+STEPS.map(s=>`<li><strong>${T(s.t)}</strong><span>${T(s.d)}</span></li>`).join('')}
 function renderPlans(){
@@ -83,6 +82,61 @@ $('#askQs').addEventListener('click',e=>{const b=e.target.closest('button');if(b
 /* ---------- demo: before / after ---------- */
 $('#dBa input').addEventListener('input',e=>$('#dBa').style.setProperty('--p',e.target.value+'%'));
 
+/* ---------- under the hood: follow a request through the pieces ---------- */
+const tMap=$('#traceMap'), tW=$('#traceWires'), tP=$('#tracePkt'), tLog=$('#traceLog');
+const tr={at:0,run:0,auto:!REDUCE,started:false,vis:false,idle:true,timer:0};
+const WIRES=[['client','api'],['api','db'],['api','ai'],['api','pay'],['api','mail']];
+const tNode=k=>tMap.querySelector(`[data-n="${k}"]`);
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+/* position of a node inside the map, ignoring any transform on the way */
+function box(el){let x=0,y=0,e=el;while(e&&e!==tMap){x+=e.offsetLeft;y+=e.offsetTop;e=e.offsetParent}return{x,y,w:el.offsetWidth,h:el.offsetHeight}}
+function wires(){
+  tW.setAttribute('viewBox',`0 0 ${tMap.clientWidth} ${tMap.clientHeight}`);
+  tW.innerHTML=WIRES.map(([a,b])=>{const A=box(tNode(a)),B=box(tNode(b));
+    if(B.y>=A.y+A.h){const x1=A.x+A.w/2,y1=A.y+A.h,x2=B.x+B.w/2,y2=B.y,my=(y1+y2)/2;return `<path data-w="${a}-${b}" d="M${x1} ${y1} C${x1} ${my} ${x2} ${my} ${x2} ${y2}"/>`}
+    const x1=A.x+A.w,y1=A.y+A.h/2,x2=B.x,y2=B.y+B.h/2,mx=(x1+x2)/2;return `<path data-w="${a}-${b}" d="M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}"/>`}).join('');
+}
+function hop(a,b,ms){return new Promise(res=>{
+  const fw=tW.querySelector(`[data-w="${a}-${b}"]`), p=fw||tW.querySelector(`[data-w="${b}-${a}"]`);
+  if(!p){res();return}
+  const L=p.getTotalLength(), t0=performance.now(); p.classList.add('on'); tP.classList.add('on');
+  const end=()=>{tP.classList.remove('on');p.classList.remove('on');res()};
+  const guard=setTimeout(end,ms+900);
+  (function f(now){const k=clamp((now-t0)/ms), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2, pt=p.getPointAtLength((fw?e:1-e)*L);
+    tP.style.transform=`translate3d(${pt.x}px,${pt.y}px,0)`;
+    if(k<1)requestAnimationFrame(f); else{clearTimeout(guard);end()}})(t0)})}
+function traceButtons(){$('#traceBtns').innerHTML=TRACE.map((t,i)=>`<button type="button" data-i="${i}" aria-pressed="${i===tr.at}">${T(t.name)}</button>`).join('')}
+function traceLine(s,last){
+  const [a,b,code,note]=s, li=document.createElement('li'); if(last)li.className='ok';
+  li.innerHTML=`<span class="to">${a===b?T(NODES[a]):T(NODES[a])+' → '+T(NODES[b])}</span><code>${esc(code)}</code><p>${esc(T(note))}</p>`;
+  tLog.appendChild(li); tLog.scrollTop=tLog.scrollHeight;
+}
+async function trace(i){
+  const run=++tr.run, sc=TRACE[i]; tr.at=i; tr.idle=false; clearTimeout(tr.timer);
+  traceButtons(); $('#traceTitle').textContent=sc.file; tLog.innerHTML='';
+  $$('#traceMap .node').forEach(n=>n.classList.remove('hot','used')); wires();
+  if(REDUCE){sc.steps.forEach((s,k)=>{tNode(s[0]).classList.add('used');tNode(s[1]).classList.add('used');traceLine(s,k===sc.steps.length-1)});tr.idle=true;return}
+  await wait(350);
+  for(let k=0;k<sc.steps.length;k++){
+    if(run!==tr.run)return;
+    const s=sc.steps[k], n=tNode(s[1]); tNode(s[0]).classList.add('used');
+    if(s[0]!==s[1])await hop(s[0],s[1],560);
+    if(run!==tr.run)return;
+    n.classList.add('used'); n.classList.remove('hot'); void n.offsetWidth; n.classList.add('hot');
+    traceLine(s,k===sc.steps.length-1); await wait(s[0]===s[1]?620:380);
+  }
+  if(run!==tr.run)return;
+  tr.idle=true;
+  if(tr.auto)tr.timer=setTimeout(()=>{if(tr.vis)trace((tr.at+1)%TRACE.length)},4200);
+}
+$('#traceBtns').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tr.auto=false;tr.started=true;tLog.setAttribute('aria-live','polite');trace(+b.dataset.i)});
+if('IntersectionObserver' in window){
+  new IntersectionObserver(es=>es.forEach(e=>{tr.vis=e.isIntersecting;
+    if(!tr.vis)return;
+    if(!tr.started){tr.started=true;trace(0)} else if(tr.auto&&tr.idle)trace((tr.at+1)%TRACE.length)}),{threshold:.3}).observe($('#trace'));
+}else{tr.started=true;tr.auto=false;setTimeout(()=>trace(0),0)}
+addEventListener('resize',wires);
+
 /* ---------- typed prompt ---------- */
 let typedRun=0;
 function typed(){
@@ -103,8 +157,19 @@ function renderBands(){const h=Array(4).fill(BAND[lang]).flat().map(w=>`<span><b
 
 /* ---------- hero: words rise one by one ---------- */
 (function(){let i=0;$$('.hero h1 > span').forEach(sp=>{i=0;sp.innerHTML=sp.textContent.trim().split(/\s+/).map(w=>`<span class="w"><span style="--i:${i++}">${esc(w)}</span></span>`).join(' ')});
-  const first=!document.documentElement.classList.contains('no-intro')&&!REDUCE;
-  setTimeout(()=>$('.hero').classList.add('go'),first?1150:120)})();
+})();
+
+/* ---------- loading screen: stays until the page is ready, then the hero comes in ---------- */
+(function(){
+  const d=document.documentElement, go=()=>$('.hero').classList.add('go');
+  if(!d.classList.contains('loading')){setTimeout(go,120);return}
+  const MIN=d.classList.contains('seen')?700:1500; let done=false;
+  const finish=()=>{if(done)return;done=true;
+    setTimeout(()=>{d.classList.add('loaded');setTimeout(go,420);setTimeout(()=>d.classList.remove('loading','loaded'),1100)},Math.max(0,MIN-performance.now()))};
+  const ready=()=>{const f=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();Promise.race([f,new Promise(r=>setTimeout(r,1200))]).then(finish,finish)};
+  if(document.readyState==='complete')ready(); else addEventListener('load',ready);
+  setTimeout(finish,5000);
+})();
 
 /* ---------- prices count up the first time they show ---------- */
 let counted=false;
@@ -132,7 +197,7 @@ function setLang(l){
   lang=l; document.documentElement.lang=l;
   $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
   try{localStorage.setItem('lang',l)}catch(e){}
-  renderWork(); renderSteps(); renderPlans(); renderFaq(); renderBands(); appDraw(); shopDraw(); ask(askAt); typed(); onScroll();
+  renderLayers(); renderSteps(); renderPlans(); renderFaq(); renderBands(); appDraw(); shopDraw(); ask(askAt); typed(); traceButtons(); wires(); if(tr.started)trace(tr.at); onScroll();
 }
 $('.lang').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setLang(b.dataset.lang)});
 const nav=$('#nav'), menuBtn=$('#menuBtn');
