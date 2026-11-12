@@ -12,10 +12,10 @@ const PLANS=[
   items:{en:['A full multi-page website','Texts reviewed and organised with you','Gallery or catalogue (without online purchase)','Booking or quote requests by form','Several languages','Visit statistics'],
          es:['Web completa de varias páginas','Textos revisados y ordenados contigo','Galería o catálogo (sin compra online)','Reservas o peticiones de presupuesto por formulario','Varios idiomas','Estadísticas de visitas']}},
  {id:'tienda',name:{en:'Shop',es:'Tienda'},price:1790,
-  for:{en:'Sell or take orders online, with payments and stock under control.',es:'Vende o recibe pedidos online, con pagos y stock controlados.'},
+  for:{en:'Your business gone digital: sell or take orders online, with payments and stock under control.',es:'Tu negocio digitalizado: vende o recibe pedidos online, con pagos y stock controlados.'},
   time:{en:'Ready in 4 to 5 weeks',es:'Lista en 4 o 5 semanas'},
-  items:{en:['Online shop or catalogue with payment','A highly customised design, at the level of this website','Your own POS, set up for Verifactu','Orders and stock in one panel','Payment gateway set up and tested','Email notices for you and your customers','A session to teach you how to manage it'],
-         es:['Tienda o catálogo con pago online','Diseño muy personalizado, al nivel de esta misma web','TPV propio para tu negocio, configurado para Verifactu','Pedidos y stock en un solo panel','Pasarela de pago configurada y probada','Avisos por correo para ti y tus clientes','Una sesión para enseñarte a gestionarla']}}
+  items:{en:['A highly customised website, at the level of this one or beyond','Online shop or catalogue with payment','Stock and orders managed from one panel','Payment gateway set up and tested','Email notices for you and your customers','A session to teach you how to manage it'],
+         es:['Web muy personalizada, al nivel de esta o superior','Tienda o catálogo con pago online','Stock y pedidos gestionados desde un solo panel','Pasarela de pago configurada y probada','Avisos por correo para ti y tus clientes','Una sesión para enseñarte a gestionarla']}}
 ];
 const CARE={price:39,
  items:{en:['Backups and updates','We check that the site stays online','Reply within 24 hours','No minimum stay'],
