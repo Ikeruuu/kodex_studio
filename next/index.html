@@ -17,7 +17,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logo.png">
-<script>try{if(sessionStorage.getItem('wipe')==='1')document.documentElement.classList.add('arriving')}catch(e){}</script>
+<script>try{var d=document.documentElement;if(sessionStorage.getItem('wipe')==='1')d.classList.add('arriving');if(sessionStorage.getItem('intro')==='1'||d.classList.contains('arriving'))d.classList.add('no-intro');sessionStorage.setItem('intro','1')}catch(e){document.documentElement.classList.add('no-intro')}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;800&display=swap" rel="stylesheet">
@@ -26,6 +26,8 @@
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
 <div class="wipe" aria-hidden="true"></div>
+<div class="intro" aria-hidden="true"><img src="assets/logo.png" alt=""></div>
+<div class="bar" aria-hidden="true"></div>
 
 <nav class="nav" id="nav" aria-label="Main">
   <div class="wrap">
@@ -63,12 +65,15 @@
       <li><span class="en">30 days of support included</span><span class="es">30 días de soporte incluidos</span></li>
     </ul>
   </div>
+  <span class="cue" aria-hidden="true"><i></i></span>
 </header>
 
 <main>
+<div class="band solid" aria-hidden="true"><div class="band-row" id="bandA"></div></div>
 <section id="services" class="solid">
   <div class="wrap">
     <div class="head">
+      <p class="path">~/kodex-studio/services</p>
       <h2><span class="en">What we build, working</span><span class="es">Lo que hacemos, funcionando</span></h2>
       <p class="lede"><span class="en">Five small demos you can touch. Each one is a simplified version of a real kind of project.</span><span class="es">Cinco demos pequeñas que puedes tocar. Cada una es una versión simplificada de un tipo de encargo real.</span></p>
     </div>
@@ -129,21 +134,23 @@
   </div>
 </section>
 
-<section id="work" class="solid" style="padding-top:24px">
+<section id="work" class="solid">
   <div class="wrap">
     <div class="head">
+      <p class="path">~/kodex-studio/work</p>
       <h2><span class="en">Things already built</span><span class="es">Cosas ya hechas</span></h2>
       <p class="lede"><span class="en">Real projects, from competition apps to work for clients.</span><span class="es">Proyectos reales, desde apps de competición hasta trabajos para clientes.</span></p>
     </div>
-    <div class="work" id="workGrid"></div>
-    <div class="shots" id="shots"></div>
+    <div class="work stagger" id="workGrid"></div>
+    <div class="shots stagger" id="shots"></div>
     <p class="shots-note"><span class="en">More photos and every project in detail on <a href="iker/#photos" data-switch>Iker's page</a>.</span><span class="es">Más fotos y todos los proyectos en detalle en <a href="iker/#photos" data-switch>la página de Iker</a>.</span></p>
   </div>
 </section>
 
-<section id="process" class="solid" style="padding-top:24px">
+<section id="process" class="solid">
   <div class="wrap">
     <div class="head">
+      <p class="path">~/kodex-studio/process</p>
       <h2><span class="en">How we work</span><span class="es">Cómo trabajamos</span></h2>
       <p class="lede"><span class="en">You talk to the person who builds your project, from the first call to well after it is online.</span><span class="es">Hablas con quien construye tu proyecto, desde la primera llamada hasta bastante después de publicarlo.</span></p>
     </div>
@@ -151,13 +158,14 @@
   </div>
 </section>
 
-<section id="plans" class="solid" style="padding-top:24px">
+<section id="plans" class="solid">
   <div class="wrap">
     <div class="head">
+      <p class="path">~/kodex-studio/plans</p>
       <h2><span class="en">Plans and prices</span><span class="es">Planes y precios</span></h2>
       <p class="lede"><span class="en">Three closed plans for the most common jobs. Half to start, half on delivery.</span><span class="es">Tres planes cerrados para los encargos más habituales. La mitad al empezar y la otra mitad a la entrega.</span></p>
     </div>
-    <div class="plans" id="planGrid"></div>
+    <div class="plans stagger" id="planGrid"></div>
     <div class="under">
       <div class="care rv" id="care"></div>
       <div class="custom rv">
@@ -172,14 +180,14 @@
   </div>
 </section>
 
-<section id="faq" class="solid" style="padding-top:24px">
+<section id="faq" class="solid">
   <div class="wrap">
-    <div class="head"><h2><span class="en">Common questions</span><span class="es">Preguntas habituales</span></h2></div>
+    <div class="head"><p class="path">~/kodex-studio/faq</p><h2><span class="en">Common questions</span><span class="es">Preguntas habituales</span></h2></div>
     <div class="faq" id="faqList"></div>
   </div>
 </section>
 
-<section class="solid" style="padding-top:24px">
+<section class="solid whosec">
   <div class="wrap">
     <div class="who rv">
       <img src="assets/iker.jpg" alt="Iker Argüelles speaking with a microphone" loading="lazy">
@@ -192,6 +200,7 @@
   </div>
 </section>
 
+<div class="band solid" aria-hidden="true"><div class="band-row rev" id="bandB"></div></div>
 <section class="contact" id="contact" data-scene-b>
   <div class="wrap">
     <p class="path">~/kodex-studio $ start</p>

@@ -14,15 +14,15 @@ const mailto=s=>`mailto:${MAIL}?subject=${encodeURIComponent('Kodex Studio · '+
 
 /* ---------- static blocks rendered from data ---------- */
 function renderWork(){
-  $('#workGrid').innerHTML=WORK.map(w=>`<article class="wk rv in"><span class="kind">${T(w.kind)}</span><h3>${esc(T(w.title))}</h3><p>${esc(T(w.d))}</p>${w.link?`<a href="${w.link.u}">${T(w.link.label)}</a>`:''}</article>`).join('');
-  $('#shots').innerHTML=SHOTS.map(f=>`<img src="assets/photos/${f}" alt="" loading="lazy">`).join('');
+  $('#workGrid').innerHTML=WORK.map((w,i)=>`<article class="wk spot tilt" style="--i:${i}"><span class="kind">${T(w.kind)}</span><h3>${esc(T(w.title))}</h3><p>${esc(T(w.d))}</p>${w.link?`<a href="${w.link.u}">${T(w.link.label)}</a>`:''}</article>`).join('');
+  $('#shots').innerHTML=SHOTS.map((f,i)=>`<img src="assets/photos/${f}" alt="" loading="lazy" style="--i:${i}">`).join('');
 }
 function renderSteps(){$('#steps').innerHTML='<span class="fill" aria-hidden="true"></span>'+STEPS.map(s=>`<li><strong>${T(s.t)}</strong><span>${T(s.d)}</span></li>`).join('')}
 function renderPlans(){
-  $('#planGrid').innerHTML=PLANS.map(p=>`<article class="plan${p.featured?' feat':''} rv in">
+  $('#planGrid').innerHTML=PLANS.map((p,i)=>`<article class="plan spot tilt${p.featured?' feat':''}" style="--i:${i}">
     ${p.featured?`<span class="badge">${lang==='es'?'El más pedido':'Most chosen'}</span>`:''}
     <h3>${T(p.name)}</h3><p class="for">${T(p.for)}</p>
-    <p class="price">${money(p.price)}</p><p class="time">${T(p.time)}</p>
+    <p class="price" data-n="${p.price}">${money(p.price)}</p><p class="time">${T(p.time)}</p>
     <ul>${T(p.items).map(i=>`<li>${i}</li>`).join('')}</ul>
     <a class="btn${p.featured?' main':''}" href="${mailto('Plan '+T(p.name))}">${lang==='es'?'Quiero este plan':'I want this plan'}</a></article>`).join('');
   $('#care').innerHTML=`<div><p class="path">plans/care</p><h3>${lang==='es'?'Mantenimiento':'Maintenance'}</h3><p class="price">${money(CARE.price)} <small>${lang==='es'?'al mes':'a month'}</small></p></div><ul>${T(CARE.items).map(i=>`<li>${i}</li>`).join('')}</ul>`;
@@ -97,12 +97,42 @@ function typed(){
   })();
 }
 
+/* ---------- moving word bands ---------- */
+const BAND={en:[['Code','&amp; camera'],['Websites','that sell'],['Apps','made to measure'],['Photos','that explain']],es:[['Code','&amp; camera'],['Webs','que venden'],['Apps','a medida'],['Fotos','que explican']]};
+function renderBands(){const h=Array(4).fill(BAND[lang]).flat().map(w=>`<span><b>${w[0]}</b> ${w[1]}</span>`).join('');$('#bandA').innerHTML=h;$('#bandB').innerHTML=h}
+
+/* ---------- hero: words rise one by one ---------- */
+(function(){let i=0;$$('.hero h1 > span').forEach(sp=>{i=0;sp.innerHTML=sp.textContent.trim().split(/\s+/).map(w=>`<span class="w"><span style="--i:${i++}">${esc(w)}</span></span>`).join(' ')});
+  const first=!document.documentElement.classList.contains('no-intro')&&!REDUCE;
+  setTimeout(()=>$('.hero').classList.add('go'),first?1150:120)})();
+
+/* ---------- prices count up the first time they show ---------- */
+let counted=false;
+function countUp(){
+  if(counted||REDUCE)return; counted=true;
+  $$('#planGrid .price').forEach(el=>{const n=+el.dataset.n,t0=performance.now();
+    (function step(now){const k=clamp((now-t0)/1100),e=1-Math.pow(1-k,3);el.textContent=money(Math.round(n*e/10)*10);if(k<1)requestAnimationFrame(step);else el.textContent=money(n)})(t0)});
+}
+
+/* ---------- pointer: light on cards, tilt, buttons that lean ---------- */
+if(FINE&&!REDUCE){
+  document.addEventListener('pointermove',e=>{
+    const c=e.target.closest('.spot');
+    if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');
+      if(c.classList.contains('tilt')){const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transition='transform .08s linear';c.style.transform=`perspective(1000px) rotateX(${-y*5}deg) rotateY(${x*6}deg) translateZ(6px)`}}
+    $$('.tilt').forEach(t=>{if(t!==c&&t.style.transform){t.style.transition='';t.style.transform=''}});
+    const b=e.target.closest('.btn.main');
+    $$('.btn.main').forEach(x=>{if(x!==b)x.style.transform=''});
+    if(b){const r=b.getBoundingClientRect();b.style.transform=`translate(${((e.clientX-r.left)/r.width-.5)*10}px,${((e.clientY-r.top)/r.height-.5)*8}px)`}
+  },{passive:true});
+}
+
 /* ---------- language, menu ---------- */
 function setLang(l){
   lang=l; document.documentElement.lang=l;
   $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
   try{localStorage.setItem('lang',l)}catch(e){}
-  renderWork(); renderSteps(); renderPlans(); renderFaq(); appDraw(); shopDraw(); ask(askAt); typed(); onScroll();
+  renderWork(); renderSteps(); renderPlans(); renderFaq(); renderBands(); appDraw(); shopDraw(); ask(askAt); typed(); onScroll();
 }
 $('.lang').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setLang(b.dataset.lang)});
 const nav=$('#nav'), menuBtn=$('#menuBtn');
@@ -113,8 +143,14 @@ addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
 document.addEventListener('click',e=>{if(!e.target.closest('#nav'))menu(false)});
 
 /* ---------- scroll effects ---------- */
+const root=document.documentElement, heroEl=$('.hero'), secs=$$('main section'), bandA=$('#bandA'), bandB=$('#bandB');
 function onScroll(){
-  const st=$('#steps'), vh=innerHeight, r=st.getBoundingClientRect();
+  const y=scrollY, vh=innerHeight, doc=root.scrollHeight-vh;
+  root.style.setProperty('--prog',doc>0?y/doc:0);
+  heroEl.style.setProperty('--hp',REDUCE?0:clamp(y/Math.max(1,heroEl.offsetHeight)));
+  if(!REDUCE){bandA.style.transform=`translate3d(${-(y*.45)%1400-60}px,0,0)`;bandB.style.transform=`translate3d(${(y*.4)%1400-1700}px,0,0)`;
+    for(const s of secs){const r=s.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;s.style.setProperty('--sy',(((r.top+r.height/2)-vh/2)/vh).toFixed(3))}}
+  const st=$('#steps'), r=st.getBoundingClientRect();
   st.style.setProperty('--p',clamp((vh*.7-r.top)/Math.max(1,r.height-48)));
   st.querySelectorAll('li').forEach(li=>li.classList.toggle('on',li.getBoundingClientRect().top<vh*.7));
 }
@@ -122,9 +158,11 @@ let ticking=false;
 function tick(){if(!ticking)return;ticking=false;onScroll()}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(tick);setTimeout(tick,120)}},{passive:true});
 addEventListener('resize',onScroll);
+$$('.head').forEach(h=>h.classList.add('rv'));
+$$('.bento .demo').forEach((d,i)=>{d.classList.add('spot');d.style.setProperty('--i',i%2)});
 if('IntersectionObserver' in window&&!REDUCE){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-  $$('.rv').forEach(el=>io.observe(el));
-}else $$('.rv').forEach(el=>el.classList.add('in'));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='planGrid')countUp();io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  $$('.rv,.stagger').forEach(el=>io.observe(el));
+}else $$('.rv,.stagger').forEach(el=>el.classList.add('in'));
 
 setLang(lang);
